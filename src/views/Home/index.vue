@@ -17,9 +17,9 @@ export default {
   data() {
     return {
       tabs: [
-        { id: 1, name: '首页', icon: 'icon-dianying', href: '/main' },
-        { id: 2, name: '分类', icon: 'icon-yingyuan', href: '/category' },
-        { id: 3, name: '搜索', icon: 'icon-tehui', href: '/search' },
+        { id: 1, name: '首页', icon: 'icon-shouye', href: '/main' },
+        { id: 2, name: '分类', icon: 'icon-fenlei', href: '/category' },
+        { id: 3, name: '搜索', icon: 'icon-sousuo', href: '/search' },
         { id: 4, name: '我的', icon: 'icon-wode', href: '/person' }
       ]
     }

@@ -2,6 +2,7 @@
   <ul class="mz-tabbar">
     <li v-for="tab in tabs" :key="tab.id">
       <router-link :to="tab.href">
+        <span class="iconfont" :class="[tab.icon]"></span>
         <i>{{ tab.name }}</i>
         <!-- iconfont暂无 -->
         <!-- <span class="iconfont" :class="[tab.icon]"></span> -->
@@ -38,11 +39,14 @@ export default {
     justify-content: center;
     align-items: center;
     &.router-link-active {
-      color: #ff5f16;
+      color: #ff2959;
     }
   }
+  i {
+    font-size: 14px;
+  }
   .iconfont {
-    font-size: 22px;
+    font-size: 30px;
   }
 }
 </style>
