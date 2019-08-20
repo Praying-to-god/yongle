@@ -4,7 +4,7 @@ import axios from 'axios'
 import { Toast } from 'vant'
 
 const request = axios.create({
-  baseURL: 'https://localhost:3000'
+  // baseURL: 'https://localhost:3000'
 })
 
 // 直接将 Response.data给返回出去
