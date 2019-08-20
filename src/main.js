@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
-// import store from "./store";
+import store from './store'
 
 Vue.config.productionTip = false
 import './assets/styles/base.scss'
@@ -11,6 +11,6 @@ Vue.use(Toast)
 
 new Vue({
   router,
-  // store,
+  store,
   render: h => h(App)
 }).$mount('#app')
