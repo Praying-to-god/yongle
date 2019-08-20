@@ -69,7 +69,7 @@ export default {
       //点击相应城市 改变当前城市
       let cityName = list[0].CITYNAME
       this.cityName = cityName
-      // 点击保存城市缩写与场馆编号
+      // 点击将城市缩写与场馆编号存储到仓库
       let cityId = list[0].CITYJX
       let venueId = list[0].FCONFIGID
       this.setCityjx(cityId)
