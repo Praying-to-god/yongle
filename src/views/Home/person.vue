@@ -1,6 +1,7 @@
 <template>
   <!-- 个人中心页 -->
   <div class="person">
-    <h1>我的</h1>
+   <div>我的</div>
   </div>
 </template>
+
