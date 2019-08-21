@@ -29,7 +29,6 @@ export default {
       state.pagerMemoryList = payload.MorePagerMemorys
       state.pbgimgs = state.pagerMemoryList.map(item => item.pbigimg)
       state.pbgimgsList = state.pbgimgs.map(item => '//static.228.cn' + item)
-      
     }
   },
   actions: {
@@ -37,7 +36,7 @@ export default {
     getShowList({ commit }) {
       setTimeout(() => {
         request
-          .get('http://localhost:24635/api/server/category/default.json')
+          .get('http://localhost:16659/api/server/category/default.json')
           .then(res => {
             // console.log(res)
             // console.log(res.data.pagerMemoryList)
@@ -57,7 +56,7 @@ export default {
       setTimeout(() => {
         request
           .post(
-            'http://localhost:24635/api/server/search/moreSearch.json',
+            'http://localhost:16659/api/server/search/moreSearch.json',
             {
               //请求方法1
               params: {
@@ -106,7 +105,9 @@ export default {
             if (res.result.code == 1) {
               commit({
                 type: 'setMorePagerMemorys',
-                MorePagerMemorys: state.pagerMemoryList.concat(res.data.pagerMemoryList),
+                MorePagerMemorys: state.pagerMemoryList.concat(
+                  res.data.pagerMemoryList
+                )
               })
             }
           })

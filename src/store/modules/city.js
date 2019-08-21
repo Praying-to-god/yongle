@@ -52,7 +52,7 @@ export default {
     //获得城市列表数据
     getCities({ commit }) {
       request
-        .get('http://localhost:29709/api/server/content/city/list.json')
+        .get('http://localhost:16659/api/server/content/city/list.json')
         .then(res => {
           console.log(res.data.fcitys)
           console.log(res.data.hotCitys)
@@ -71,7 +71,7 @@ export default {
     getCityType({ commit, state }) {
       request
         .get(
-          `http://localhost:29709/api/server/content/city/${state.cityjx}.json`
+          `http://localhost:16659/api/server/content/city/${state.cityjx}.json`
         )
         .then(res => {
           console.log(res)
@@ -87,7 +87,7 @@ export default {
     getCityVenue({ commit, state }) {
       request
         .get(
-          `http://localhost:29709/api//server/content/moreProductPlay.json?fcity=${state.fconfigid}&pageNum=1&type=1`
+          `http://localhost:16659/api//server/content/moreProductPlay.json?fcity=${state.fconfigid}&pageNum=1&type=1`
         )
         .then(res => {
           console.log(res)
