@@ -9,15 +9,14 @@
                     </div>
                     <div class="right">
                         <p>{{item.name}}</p>
-                        <span>{{item.begindate.replace(/-/g,'.')}}</span>
+                        <span>{{item.begindate.replace(/-/g,'.')+'~'+item.enddate.replace(/-/g,'.')}}</span>
                         <span>{{item.vname}}</span>
                         <strong>{{parseInt(item.minprice)+'-'+item.maxprice+'元'}}</strong>
                     </div>
                 </a>
             </li>
         </ul>
-
-
+    <div class="lode-more" @click="loadMore"><span>查看更多</span></div>
     </div>
 </template>
 
@@ -30,17 +29,32 @@ export default {
         pbgimgs:Array
     },
     methods: {
-       
-    
-    
+       loadMore(){
+           this.$emit("loadMore");
+       }
     },
-    
 }
 </script>
 <style lang="scss">
 .category-list{
     width: 100%;
     padding:0 20px;
+    box-sizing: border-box;
+    .lode-more{
+        width: 100px;
+        height: 27px;
+        line-height: 27px;
+        text-align: center;
+        border-radius: 10px;
+        margin: auto;
+        background: #fff;
+        box-shadow: 0px 2px 6px 0px rgba(255, 58, 86, 0.2);
+    span{
+        background: linear-gradient(to right, #ff7e6f, #ff2959);
+        -webkit-background-clip: text;
+        color: transparent;
+    }
+    }
     .category-list__ul{
         width: 335px;
         .goods-con{
@@ -105,7 +119,24 @@ export default {
             font-weight: bold;
             font-size: 14px;
         }
-
+        span:nth-of-type(1){
+            font-size: 14px;
+            margin-top: 10px;
+            margin-bottom: 4px;
+        }
+        span:nth-of-type(2){
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+        span{
+            display: block;
+            color:#999ea3;
+        }
+        strong{
+            color:#ff3a56;
+            font-size: 14px;
+            font-weight: bold;
+        }
     }
 
 </style>
