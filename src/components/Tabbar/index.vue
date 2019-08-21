@@ -44,12 +44,8 @@ export default {
     font-size: 14px;
   }
   .iconfont {
-<<<<<<< HEAD
     font-size: 22px;
     padding-bottom: 4px;
-=======
-    font-size: 30px;
->>>>>>> homeindex
   }
 }
 </style>
