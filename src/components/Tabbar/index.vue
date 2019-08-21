@@ -37,12 +37,19 @@ export default {
     justify-content: center;
     align-items: center;
     &.router-link-active {
-      color: #ff5f16;
+      color: #ff2959;
     }
   }
+  i {
+    font-size: 14px;
+  }
   .iconfont {
+<<<<<<< HEAD
     font-size: 22px;
     padding-bottom: 4px;
+=======
+    font-size: 30px;
+>>>>>>> homeindex
   }
 }
 </style>
