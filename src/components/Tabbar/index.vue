@@ -2,9 +2,8 @@
   <ul class="mz-tabbar">
     <li v-for="tab in tabs" :key="tab.id">
       <router-link :to="tab.href">
+        <span class="iconfont" :class="[tab.icon]"></span>
         <i>{{ tab.name }}</i>
-        <!-- iconfont暂无 -->
-        <!-- <span class="iconfont" :class="[tab.icon]"></span> -->
       </router-link>
     </li>
   </ul>
@@ -43,6 +42,7 @@ export default {
   }
   .iconfont {
     font-size: 22px;
+    padding-bottom: 4px;
   }
 }
 </style>

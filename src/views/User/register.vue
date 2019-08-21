@@ -13,11 +13,13 @@
           <form id="form">
             <div class="from">
               <label>
-                <input type="text" class="tel" placeholder="请输入账号">
+                <input type="text" class="tel" placeholder="请输入账号" ref="input" id="txt">
+                <span class="test" ref="verify"></span>
                 <i class="iconfont icon-iconzh1 ico-tel"></i>
               </label>
               <label>
-                <input type="password" class="pwd" placeholder="请输入密码">
+                <input type="password" class="pwd" placeholder="请输入密码" ref="pwd">
+                <span class="test" ref="verify1"></span>
                 <i class="iconfont icon-mimakai"></i>
                 <i class="iconfont icon-mimasuo ico-tel"></i>
                 <i class="iconfont icon-yanjing_yincang_o"></i>
@@ -30,7 +32,7 @@
                 <a class="obtain-code red">获取验证码</a>
               </label>
             </div>
-            <div class="login-btn">注册</div>
+            <div class="login-btn" @click="test">注册</div>
             <div class="other-login-type">
               <ul>
                 <li><a><i class="iconfont icon-baidu"></i></a></li>
@@ -82,6 +84,10 @@
       height: 518px;
       margin: 30px 50px 0;
 
+      .content{
+        box-sizing: border-box;
+      }
+
       h3{
         color: #fff;
         font-size: 32px;
@@ -105,6 +111,7 @@
           font-size: 16px;
           padding: 0 30px 0 20px;
           background: rgba(0,0,0,0);
+          margin-bottom: 5px;
         }
 
         input:hover{
@@ -120,6 +127,12 @@
           position: absolute;
           top: 13px;
           left: 25px;
+        }
+
+        .test{
+          display: block;
+          color: red;
+          text-align: center;
         }
 
         .icon-yanjing_yincang_o{
@@ -260,6 +273,38 @@
       }
     }
   }
-  
-
 </style>
+
+<script>
+import { mapState,mapMutations,mapActions } from 'vuex'
+export default {
+  name: 'Register',
+  methods: {
+    ...mapActions('user',['getacc']),
+    ...mapMutations('user',['store']),
+    test(){
+      var uPattern = /^[a-zA-Z0-9_-]{4,16}$/
+      if(this.$refs.input.value === '' || this.$refs.pwd.value === ''){
+        this.$refs.verify.innerHTML = '账号不能为空'
+        this.$refs.verify1.innerHTML = '密码不能为空'
+      } else {
+        let getzh = this.$refs.input.value
+        let getpwd = this.$refs.pwd.value
+        if(uPattern.test(this.$refs.input.valuet) && uPattern.test(this.$refs.pwd.valuet)){
+          this.$refs.verify.innerHTML = ''
+          this.$refs.verify1.innerHTML = ''
+          this.getacc({account1:getzh, password1:getpwd})
+          alert('注册成功')
+          this.$router.push('/login')
+        } else {
+          this.$refs.verify.innerHTML = '账号/密码错误'
+          this.$refs.verify1.innerHTML = '账号/密码错误'
+        }
+      }
+    }
+  },
+  mounted() {
+    this.store()
+  }
+}
+</script>
