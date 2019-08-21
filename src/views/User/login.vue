@@ -236,3 +236,15 @@
   
 
 </style>
+<script>
+import { mapState } from 'vuex'
+export default {
+  name: 'Login',
+
+  computed: mapState(['account']),
+
+  mounted() {
+    console.log(this.account)
+  }
+}
+</script>

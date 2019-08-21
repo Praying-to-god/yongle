@@ -6,6 +6,9 @@ import show from './modules/show'
 import city from './modules/city'
 import allLei from './modules/allLei'
 import allTime from './modules/allTime'
+
+import user from '../store/modules/user'
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -13,6 +16,7 @@ export default new Vuex.Store({
     show,
     city,
     allLei,
-    allTime
+    allTime,
+    user
   }
 })
