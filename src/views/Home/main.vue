@@ -4,7 +4,7 @@
     <!-- 头部 -->
     <div class="main-head">
       <router-link to="/city" class="main-city">
-        <span>全国</span>
+        <span>{{dizhi}}</span>
         <i class="iconfont icon-below-s"></i>
       </router-link>
       <div class="main-search">
@@ -62,7 +62,7 @@
       </router-link>
     </div>
     <!-- 列表组件 -->
-    <Homelist :recommendlist="recommendlist" :gymList="gymList" :cur="cur" @abc="bcd" />
+    <Homelist :recommendlist="tuijian" :gymList="gymList" :cur="cur" @abc="bcd" />
   </div>
 </template>
 <script>
@@ -81,17 +81,21 @@ export default {
     Homelist
   },
   computed: {
-    ...mapState('home', ['bannerList', 'recommendlist', 'gymList'])
+    // ...mapState('home', ['bannerList', 'recommendlist', 'gymList']),
+    ...mapState('city', ['bannerList', 'tuijian', 'gymList', 'dizhi'])
   },
   methods: {
-    ...mapActions('home', ['getrecommendlist', 'getgymList']),
+    // ...mapActions('home', ['getrecommendlist', 'getgymList']),
+    ...mapActions('city', ['getCityType', 'getCityVenue']),
     bcd(a) {
       this.cur = a
     }
   },
   created() {
-    this.getrecommendlist()
-    this.getgymList()
+    // this.getrecommendlist()
+    // this.getgymList()
+    this.getCityType()
+    this.getCityVenue()
   }
 }
 </script>
