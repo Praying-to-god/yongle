@@ -9,7 +9,7 @@
         >
         <van-icon name="search" slot="right" />
     </van-nav-bar>
-    <searchBar :fcitys="fcitys" :typeas="typeas" />
+    <searchBar :fcitys="fcitys" :typeas="typeas" @addre="addre" @kinds="kinds" @tim="tim"/>
   <categoryList :pagerMemorys="pagerMemoryList" :pbgimgs="pbgimgsList" @loadMore="loadMore"/>
   </div>
 </template>
@@ -29,24 +29,34 @@ export default {
 
   },
     methods: {
+      ...mapMutations('show', ['getAddress','getkinds','gettimes']),
+      ...mapActions('show', ['getShowList','getMoreList','getChoiceList']),
     onClickLeft() {
       Toast('返回');
     },
     onClickRight() {
       Toast('按钮');
     },
-    //获取分类列表数据
-    // loadCategoryList(){
-    // },
-    ...mapActions('show', ['getShowList','getMoreList']),
     //子组件点击获取更多时，请求ajax
     loadMore(){
-      this.getMoreList();
+      this.getMoreList()
+    },
+    addre(a){
+      this.getAddress({add:a});
+      this.getChoiceList()
+    },
+    kinds(a){
+      this.getkinds({kin:a});
+      this.getChoiceList()
+    },
+    tim(a){
+      this.gettimes({tim:a});
+      this.getChoiceList()
     }
   },
   created() {
     this.getShowList();
-    // console.log(this.pagerMemoryList);
+    // console.log(fcitys());
   },
 }
 

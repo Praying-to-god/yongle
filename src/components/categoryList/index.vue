@@ -1,11 +1,13 @@
-<template>
-    <div class="category-list">
+<template >
+    <div class="category-list" v-if="pagerMemorys.length !== 0">
+        
+       
         <ul class="category-list__ul">
             <li class="category-list__item" v-for="item in pagerMemorys" :key="item.isdate">
                 <a href="#" class="goods-con">
                     <div class="left">
                         <img :src="pbgimgs[pagerMemorys.indexOf(item)]" :alt="item.name">
-                        <i :class="item.status==='0'?'gradual-red':'ticket-state-blue'" class="tip">{{item.status==='0'?'售票中':'预定'}}</i>
+                        <i :class="item.status==='0'?'gradual-red':(item.status==='1'?'ticket-state-blue':'gradual-gray')" class="tip">{{item.status==='0'?'售票中':(item.status==='1'?'预定':'售完')}}</i>
                     </div>
                     <div class="right">
                         <p>{{item.name}}</p>
@@ -16,7 +18,12 @@
                 </a>
             </li>
         </ul>
-    <div class="lode-more" @click="loadMore"><span>查看更多</span></div>
+        <div class="lode-more" @click="loadMore"><span>查看更多</span></div>
+    </div>
+    <div v-else class="noneMeg">
+        <img src="../../../public/ca.jpg" alt="">
+        <p>没找到相关信息</p>
+        <p>换个分类试试</p>
     </div>
 </template>
 
@@ -101,6 +108,9 @@ export default {
             background: linear-gradient(to right, #ff7e6f, #ff2959);
             box-shadow: 0px 2px 6px 0px rgba(255, 37, 68, 0.2);
         }
+        .gradual-gray{
+            background: linear-gradient(to left, #8da0a9, #d5dde1 );
+        }
         }
         .right{
             margin-left: 15px;
@@ -138,5 +148,22 @@ export default {
             font-weight: bold;
         }
     }
-
+.noneMeg{
+    margin-top: 20px;
+    margin-bottom: 40px;
+    line-height: 30px;
+    text-align: center;
+    img{
+        width: 140px;
+    }
+    p:nth-of-type(1){
+        font-size: 14px;
+        color:#999;
+        font-weight: 900;
+    }
+    p:nth-of-type(2){
+        font-size: 14px;
+        color:#999;
+    }
+}
 </style>
