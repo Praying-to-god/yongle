@@ -3,6 +3,11 @@
   <div class="subject">
     <div class="subject-head">
       <img src="https://static.228.cn/upload/2019/06/21/1561085418197_z8x2_m1.jpg!t640x260.jpg" alt />
+      <div class="head-icon">
+        <router-link to="/main">
+          <i class="gobacks"></i>
+        </router-link>
+      </div>
     </div>
     <div class="subject-content">
       <h4 class="tc">2019谢春花【无声叛逆】巡回演出</h4>
@@ -37,6 +42,21 @@
   </div>
 </template>
 
+<script>
+import request from '../../utils/request'
+export default {
+  name: 'Subject',
+  data() {
+    return {}
+  },
+  created() {
+    request.get('/api/server/subject/detail-xiechunhua0621.json').then(res => {
+      console.log(res)
+    })
+  }
+}
+</script>
+
 <style lang="scss">
 .subject-list {
   padding: 20px;
@@ -49,12 +69,32 @@
   overflow: hidden;
   color: #333;
   .left {
+    position: relative;
     float: left;
     width: 85px;
     height: 113px;
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0px 1px 4px 0px rgba(58, 64, 69, 0.3);
+    i {
+      position: absolute;
+      left: 0;
+      top: 0;
+      display: block;
+      height: 20px;
+      line-height: 20px;
+      color: #fff;
+      font-style: normal;
+      font-size: 11px;
+      font-weight: bold;
+      border-radius: 10px 0;
+      padding: 0 5px;
+      text-align: center;
+      background-origin: url('../../assets/imges/icon.png');
+      background-position: 0 -2419px;
+      background-image: linear-gradient(to right, #ff7e6f, #ff2959);
+      box-shadow: 0px 2px 6px 0px rgba(255, 37, 68, 0.2);
+    }
   }
   .right {
     width: 235px;
@@ -106,9 +146,23 @@
 .subject-head {
   width: 100%;
   height: 190px;
+  position: relative;
   img {
     width: 100%;
     height: 100%;
+  }
+  .head-icon {
+    i {
+      position: absolute;
+      background: url('../../assets/imges/icon.png') 0 -3454px no-repeat;
+      left: 16px;
+      top: 10px;
+      width: 40px;
+      height: 31px;
+      display: block;
+      background-size: 150px;
+      z-index: 11;
+    }
   }
 }
 .subject-content {

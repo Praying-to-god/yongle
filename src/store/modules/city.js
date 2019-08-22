@@ -77,7 +77,7 @@ export default {
       commit
     }) {
       request
-        .get('http://localhost:21947/api/server/content/city/list.json')
+        .get('/api/server/content/city/list.json')
         .then(res => {
           console.log(res.data.fcitys)
           console.log(res.data.hotCitys)
@@ -100,7 +100,7 @@ export default {
       if (state.cities.length == 0) {
         request
           .get(
-            `http://localhost:21947/api/server/content/city/sz.json`
+            `/api/server/content/city/sz.json`
           )
           .then(res => {
 
@@ -114,7 +114,7 @@ export default {
                 }),
                 commit({
                   type: 'setbannerList',
-                  bannerList: res.data.slideList.splice(0, 5)
+                  bannerList: res.data.slideList.length > 4 ? res.data.slideList.slice(0, 5) : res.data.slideList
                 }),
                 commit({
                   type: 'setdizhi',
@@ -125,7 +125,7 @@ export default {
       } else {
         request
           .get(
-            `http://localhost:21947/api/server/content/city/${state.cityjx}.json`
+            `/api/server/content/city/${state.cityjx}.json`
           )
           .then(res => {
 
@@ -157,7 +157,7 @@ export default {
       if (state.cities.length == 0) {
         request
           .get(
-            `http://localhost:21947/api/server/content/moreProductPlay.json?fcity=131054&pageNum=1&type=1`
+            `/api/server/content/moreProductPlay.json?fcity=131054&pageNum=1&type=1`
           )
           .then(res => {
             console.log(res)
@@ -173,7 +173,7 @@ export default {
       } else {
         request
           .get(
-            `http://localhost:21947/api/server/content/moreProductPlay.json?fcity=${state.fconfigid}&pageNum=1&type=1`
+            `/api/server/content/moreProductPlay.json?fcity=${state.fconfigid}&pageNum=1&type=1`
           )
           .then(res => {
             console.log(res)

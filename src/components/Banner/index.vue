@@ -30,7 +30,7 @@ export default {
   methods: {
     initSwiper() {
       /* 实例轮播图 */
-      let swiper = new Swiper('.swiper-container', {
+      let swiper = new Swiper(this.$el, {
         loop: true,
         autoplay: {
           delay: 2000,
