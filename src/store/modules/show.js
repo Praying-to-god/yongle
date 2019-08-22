@@ -34,7 +34,7 @@ export default {
       state.pbgimgsList = state.pbgimgs.map(item => '//static.228.cn' + item)
     },
     //筛选设置category列表数据-------------------------------------------------------------------->
-    setChoices(state, payload){
+    setChoices(state, payload) {
       state.pagerMemoryList = payload.choices
       state.pbgimgs = state.pagerMemoryList.map(item => item.pbigimg)
       state.pbgimgsList = state.pbgimgs.map(item => '//static.228.cn' + item)
@@ -68,10 +68,12 @@ export default {
   },
   actions: {
     //首次数据获取--------------------------------------------------------------------------------------------------------------------->
-    getShowList({ commit }) {
+    getShowList({
+      commit
+    }) {
       setTimeout(() => {
         request
-          .get('http://localhost:20338/api/server/category/default.json')
+          .get('http://localhost:21947/api/server/category/default.json')
           .then(res => {
             if (res.result.code == 1) {
               commit({
@@ -84,13 +86,15 @@ export default {
       }, 100)
     },
     //点击获取更多，数据获取----------------------------------------------------------------------------------------------------------->
-    getMoreList({ commit, state }) {
+    getMoreList({
+      commit,
+      state
+    }) {
       state.num++
       setTimeout(() => {
         request
           .post(
-            'http://localhost:20338/api/server/search/moreSearch.json',
-            {
+            'http://localhost:21947/api/server/search/moreSearch.json', {
               //请求方法1
               params: {
                 datestrEscape: 'all',
@@ -110,8 +114,7 @@ export default {
               }
               //  请求参数做修改，方法2
               // params: datestrEscape=all&datestr=all&type=1&tagstr=all&datestrSelected=all&typebjx=all&orderstype=all&filter=all&total=1729&typeajx=all&cityjx=all&keyword=&pagenum=2'}, {
-            },
-            {
+            }, {
               transformRequest: data => {
                 let result = []
                 for (let key in data) {
@@ -146,11 +149,14 @@ export default {
       }, 100)
     },
     //联动数据获取--------------------------------------------------------------------------------------------------------------------->
-    getChoiceList({ state, commit }) {
+    getChoiceList({
+      state,
+      commit
+    }) {
       if ((state.address == '') & (state.kind == '') & (state.times == '')) {
-        state.links = 'http://localhost:20338/api/server/category/default.json'
+        state.links = 'http://localhost:21947/api/server/category/default.json'
       } else {
-        state.links = `http://localhost:20338/api/server/category/search${state.address}${state.kind}${state.times}.json`
+        state.links = `http://localhost:21947/api/server/category/search${state.address}${state.kind}${state.times}.json`
       }
       setTimeout(() => {
         request.get(state.links).then(res => {

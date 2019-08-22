@@ -10,7 +10,7 @@ export default {
     bannerList: [], //存储轮播图数据
     tuijian: [], //存储推荐的数据
     gymList: [], //存储场馆数据
-    dizhi: [] //存储定位地址
+    dizhi: '' //存储定位地址
   },
   getters: {
     //对城市数据进行处理
@@ -65,6 +65,10 @@ export default {
     //修改头图的地址
     setdizhi(state, payload) {
       state.dizhi = payload.dizhi
+    },
+    //清空城市数据
+    clearcities(state) {
+      state.cities = []
     }
   },
   actions: {
@@ -73,7 +77,7 @@ export default {
       commit
     }) {
       request
-        .get('http://localhost:16659/api/server/content/city/list.json')
+        .get('http://localhost:21947/api/server/content/city/list.json')
         .then(res => {
           console.log(res.data.fcitys)
           console.log(res.data.hotCitys)
@@ -93,10 +97,10 @@ export default {
       commit,
       state
     }) {
-      if (state.tuijian.length == 0) {
+      if (state.cities.length == 0) {
         request
           .get(
-            `http://localhost:23220/api/server/content/city/sz.json`
+            `http://localhost:21947/api/server/content/city/sz.json`
           )
           .then(res => {
 
@@ -121,7 +125,7 @@ export default {
       } else {
         request
           .get(
-            `http://localhost:23220/api/server/content/city/${state.cityjx}.json`
+            `http://localhost:21947/api/server/content/city/${state.cityjx}.json`
           )
           .then(res => {
 
@@ -150,10 +154,10 @@ export default {
       commit,
       state
     }) {
-      if (state.gymList.length == 0) {
+      if (state.cities.length == 0) {
         request
           .get(
-            `http://localhost:23220/api/server/content/moreProductPlay.json?fcity=131054&pageNum=1&type=1`
+            `http://localhost:21947/api/server/content/moreProductPlay.json?fcity=131054&pageNum=1&type=1`
           )
           .then(res => {
             console.log(res)
@@ -169,7 +173,7 @@ export default {
       } else {
         request
           .get(
-            `http://localhost:23220/api/server/content/moreProductPlay.json?fcity=${state.fconfigid}&pageNum=1&type=1`
+            `http://localhost:21947/api/server/content/moreProductPlay.json?fcity=${state.fconfigid}&pageNum=1&type=1`
           )
           .then(res => {
             console.log(res)
