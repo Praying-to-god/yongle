@@ -70,17 +70,15 @@ export default {
     //首次数据获取--------------------------------------------------------------------------------------------------------------------->
     getShowList({ commit }) {
       setTimeout(() => {
-        request
-          .get('http://localhost:13477/api/server/category/default.json')
-          .then(res => {
-            if (res.result.code == 1) {
-              commit({
-                type: 'setPagerMemoryList',
-                pagerMemorys: res.data.pagerMemoryList,
-                allData: res.data
-              })
-            }
-          })
+        request.get('/api/server/category/default.json').then(res => {
+          if (res.result.code == 1) {
+            commit({
+              type: 'setPagerMemoryList',
+              pagerMemorys: res.data.pagerMemoryList,
+              allData: res.data
+            })
+          }
+        })
       }, 100)
     },
     //点击获取更多，数据获取----------------------------------------------------------------------------------------------------------->
@@ -89,7 +87,7 @@ export default {
       setTimeout(() => {
         request
           .post(
-            'http://localhost:13477/api/server/search/moreSearch.json',
+            '/api/server/search/moreSearch.json',
             {
               //请求方法1
               params: {

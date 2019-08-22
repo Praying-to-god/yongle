@@ -43,12 +43,14 @@
       </label>
     </div>
     <div class="bot">
-      <button>安全退出</button>
+      <button @click="quit">安全退出</button>
     </div>
   </div>
 </template>
 
 <script>
+import router from '../../router'
+import { mapState, mapMutations } from 'vuex'
 export default {
   data() {
     return {
@@ -58,7 +60,21 @@ export default {
         { id: '3', name: '修改密码' }
       ]
     }
-  }
+  },
+  computed: {
+    ...mapState('user',['userInfo'])
+  },
+  methods: {
+    ...mapMutations('user', ['EmptyOnExit']),
+    quit() {
+        localStorage.clear()
+        this.EmptyOnExit(null)
+        router.replace('/main')
+    }
+  },
+  updated() {
+    this.quit()
+  },
 }
 </script>
 

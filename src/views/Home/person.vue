@@ -12,8 +12,8 @@
         <div class="con">
           <div class="top">
             <div class="head-portrait">
-              <img style="height:64px;border:2px solid #fff;border-radius:50%" src="../../assets/imges/head-photo.png" alt="">    
-              <h4>user</h4>
+              <img style="height:64px;border:2px solid #fff;border-radius:50%" :src="this.userInfo.avatar" alt="">    
+              <h4>wap{{this.userInfo.username}}</h4>
             </div>
             <div class="right">
               <a href="#">
@@ -60,6 +60,8 @@
 
 
 <script>
+import { mapState } from 'vuex'
+import router from '../../router'
 export default {
   data() {
     return {
@@ -69,8 +71,21 @@ export default {
         { id: 3, name: '我的登记', icon: 'icon-wodedengji', href: 'person' },
         { id: 4, name: '我的提问', icon: 'icon-icon-test', href: 'person' },
         { id: 5, name: '观影凭证', icon: 'icon-pingzheng', href: 'person' }
-      ]
+      ],
     }
+  },
+  computed: {
+    ...mapState('user', ['userInfo'])
+  },
+  methods: {
+    fn() {
+      if(!this.userInfo){
+        router.replace('/login')
+      }
+    }
+  },
+  mounted() {
+   this.fn()
   }
 }
 </script>

@@ -57,7 +57,7 @@
     </div>
     <!-- 谢春花链接 -->
     <div class="first-pay-first">
-      <router-link to="#">
+      <router-link to="/subject">
         <img src="https://static.228.cn/upload/2019/06/21/1561085435056_e4a0_m1.jpg" alt />
       </router-link>
     </div>
