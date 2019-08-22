@@ -76,21 +76,27 @@ export default {
     getCities({
       commit
     }) {
-      request
-        .get('/api/server/content/city/list.json')
-        .then(res => {
-          console.log(res.data.fcitys)
-          console.log(res.data.hotCitys)
-          // console.log(res.data.hotCitys.PRODUCTNUM)
+      request.get('/api/server/content/city/list.json').then(res => {
+        console.log(res.data.fcitys)
+        console.log(res.data.hotCitys)
+        // console.log(res.data.hotCitys.PRODUCTNUM)
 
-          if (res.result.code == 1) {
+        if (res.result.code == 1) {
+          commit({
+              // 进行对仓库state赋值处理
+              type: 'setTuijian',
+              tuijian: res.data.recommendPage.list
+            }),
             commit({
-              type: 'setCities',
-              cities: res.data.fcitys,
-              hotCity: res.data.hotCitys
+              type: 'setbannerList',
+              bannerList: res.data.slideList.splice(0, 5)
+            }),
+            commit({
+              type: 'setdizhi',
+              dizhi: res.data.fconfig.CITYNAME
             })
-          }
-        })
+        }
+      })
     },
     // 获取选择城市首页数据
     getCityType({
@@ -98,39 +104,29 @@ export default {
       state
     }) {
       if (state.cities.length == 0) {
-        request
-          .get(
-            `/api/server/content/city/sz.json`
-          )
-          .then(res => {
-
-            console.log(res)
-            console.log(state.cityjx)
-            if (res.result.code == 1) {
+        request.get(`/api/server/content/city/sz.json`).then(res => {
+          console.log(res)
+          console.log(state.cityjx)
+          if (res.result.code == 1) {
+            commit({
+                // 进行对仓库state赋值处理
+                type: 'setTuijian',
+                tuijian: res.data.recommendPage.list
+              }),
               commit({
-                  // 进行对仓库state赋值处理
-                  type: 'setTuijian',
-                  tuijian: res.data.recommendPage.list
-                }),
-                commit({
-                  type: 'setbannerList',
-                  bannerList: res.data.slideList.length > 4 ? res.data.slideList.slice(0, 5) : res.data.slideList
-                }),
-                commit({
-                  type: 'setdizhi',
-                  dizhi: res.data.fconfig.CITYNAME
-                })
-            }
-          })
+                type: 'setbannerList',
+                bannerList: res.data.slideList.splice(0, 5)
+              }),
+              commit({
+                type: 'setdizhi',
+                dizhi: res.data.fconfig.CITYNAME
+              })
+          }
+        })
       } else {
         request
-          .get(
-            `/api/server/content/city/${state.cityjx}.json`
-          )
+          .get(`/api/server/content/city/${state.cityjx}.json`)
           .then(res => {
-
-            console.log(res)
-            console.log(state.cityjx)
             if (res.result.code == 1) {
               commit({
                 // 进行对仓库state赋值处理
@@ -160,8 +156,6 @@ export default {
             `/api/server/content/moreProductPlay.json?fcity=131054&pageNum=1&type=1`
           )
           .then(res => {
-            console.log(res)
-            console.log(state.fconfigid)
             if (res.result.code == 1) {
               commit({
                 // 进行对仓库state赋值处理
@@ -176,8 +170,6 @@ export default {
             `/api/server/content/moreProductPlay.json?fcity=${state.fconfigid}&pageNum=1&type=1`
           )
           .then(res => {
-            console.log(res)
-            console.log(state.fconfigid)
             if (res.result.code == 1) {
               commit({
                 // 进行对仓库state赋值处理

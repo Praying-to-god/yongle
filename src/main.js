@@ -5,15 +5,12 @@ import store from './store'
 
 Vue.config.productionTip = false
 import './assets/styles/base.scss'
-import {
-  Toast,
-  NavBar,
-  Icon
-} from 'vant'
+import { Toast, NavBar, Icon, Dialog } from 'vant'
 
 Vue.use(Toast)
   .use(NavBar)
   .use(Icon)
+  .use(Dialog)
 
 new Vue({
   router,
