@@ -5,15 +5,14 @@
       <b @click="fn1(1)" :class="{active:cur==1}">场馆</b>
     </h3>
     <ul v-show="cur==0" class="recommend">
-      <li v-for="(item,index) in recommendlist " :key="index">
-        <a href="#">
+      <!-- 绑定点击事件 点击时跳转相关购票详情 -->
+      <li v-for="(item,index) in recommendlist " :key="index"  @click="ticketD(item)">
           <img :src="`https://static.228.cn${item.PBIGIMG}`" alt />
           <b class="recommend-name">{{item.NAME}}</b>
           <span class="recommend-data">{{item.BEGINDATE.replace(/-/g,'.').substring(0,10)}}</span>
           <span class="recommend-price-one">
             <b class="recommend-price">¥ {{item.MINPRICE}}</b>起
           </span>
-        </a>
       </li>
     </ul>
     <ul v-show="cur==1" class="gym">
@@ -27,7 +26,9 @@
     </ul>
   </div>
 </template>
+
 <script>
+import { mapMutations } from 'vuex'
 export default {
   name: 'Homelist',
   props: {
@@ -36,8 +37,20 @@ export default {
     gymList: Array
   },
   methods: {
+    ...mapMutations('ticket', ['setProductid']),
     fn1(a) {
       this.$emit('abc', a)
+    },
+    ticketD(item) {
+      //跳转到相关购票页面
+      this.$router.push({
+        path: '/ticket',
+        query: {
+          ticket: item.PRODUCTID
+        }
+      })
+      //点击保存相关购票页id到ticket仓库
+      this.setProductid(item.PRODUCTID)
     }
   }
 }

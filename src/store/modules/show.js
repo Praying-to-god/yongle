@@ -34,7 +34,7 @@ export default {
       state.pbgimgsList = state.pbgimgs.map(item => '//static.228.cn' + item)
     },
     //筛选设置category列表数据-------------------------------------------------------------------->
-    setChoices(state, payload){
+    setChoices(state, payload) {
       state.pagerMemoryList = payload.choices
       state.pbgimgs = state.pagerMemoryList.map(item => item.pbigimg)
       state.pbgimgsList = state.pbgimgs.map(item => '//static.228.cn' + item)
@@ -71,7 +71,7 @@ export default {
     getShowList({ commit }) {
       setTimeout(() => {
         request
-          .get('http://localhost:20338/api/server/category/default.json')
+          .get('http://localhost:13477/api/server/category/default.json')
           .then(res => {
             if (res.result.code == 1) {
               commit({
@@ -89,7 +89,7 @@ export default {
       setTimeout(() => {
         request
           .post(
-            'http://localhost:20338/api/server/search/moreSearch.json',
+            'http://localhost:13477/api/server/search/moreSearch.json',
             {
               //请求方法1
               params: {
@@ -148,9 +148,9 @@ export default {
     //联动数据获取--------------------------------------------------------------------------------------------------------------------->
     getChoiceList({ state, commit }) {
       if ((state.address == '') & (state.kind == '') & (state.times == '')) {
-        state.links = 'http://localhost:20338/api/server/category/default.json'
+        state.links = '/api/server/category/default.json'
       } else {
-        state.links = `http://localhost:20338/api/server/category/search${state.address}${state.kind}${state.times}.json`
+        state.links = `/api/server/category/search${state.address}${state.kind}${state.times}.json`
       }
       setTimeout(() => {
         request.get(state.links).then(res => {

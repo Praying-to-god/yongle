@@ -3,23 +3,27 @@ import request from '../../utils/request'
 export default {
   namespaced: true,
   state: {
-    ticket: [] //存储票的详细信息
+    ticket: [], //存储票的详细信息
+    productId: [] //存储购票页id
   },
   mutations: {
     //修改获得的数据
     setTicket(state, payload) {
-      state.ticket = payload
+      state.ticket = payload.ticket
+    },
+    //修改存储的id
+    setProductid(state, payload) {
+      state.productId = payload
     }
   },
   actions: {
     //获取购票详情
-    getTicket({ commit }) {
+    getTicket({ commit, state }) {
       request
         .get(
-          'http://localhost:39639/api/server/product/ticket-568047097.json?pid=568047097.html'
+          `/api/server/product/ticket-${state.productId}.json?pid=${state.productId}.html`
         )
         .then(res => {
-          console.log(res.data.product)
           if (res.result.code == 1) {
             commit({
               type: 'setTicket',
