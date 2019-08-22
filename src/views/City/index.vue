@@ -3,7 +3,7 @@
   <div class="city-list">
     <div class="title">
       <router-link to="/main">
-      <span class="iconfont icon-fanhuizuojiantouxiangzuoshangyibuxianxing"></span>
+        <span class="iconfont icon-fanhuizuojiantouxiangzuoshangyibuxianxing"></span>
       </router-link>
       <h3>选择演出城市</h3>
       <i></i>
@@ -16,12 +16,22 @@
         </div>
         <h4>热门城市</h4>
         <div class="hot_city">
-            <span>全国</span>
-            <span v-for="i in hotCity" :key="i.CITYJX"  @click="choiceHot(i)" :class="{'active': i.JXNAME === cityName}">{{i.JXNAME}}</span>
-        </div>  
+          <span>全国</span>
+          <span
+            v-for="i in hotCity"
+            :key="i.CITYJX"
+            @click="choiceHot(i)"
+            :class="{'active': i.JXNAME == cityName}"
+          >{{i.JXNAME}}</span>
+        </div>
         <h4>更多城市</h4>
-         <ul class="more_city">
-          <li v-for="item in cityList" :key="item.py" :ref="'item-'+item.py" @click="choice(item.list)"> 
+        <ul class="more_city">
+          <li
+            v-for="item in cityList"
+            :key="item.py"
+            :ref="'item-'+item.py"
+            @click="choice(item.list)"
+          >
             <ul class="more_con">
               <i class="more_title">{{item.py}}</i>
               <li v-for="city in item.list" :key="city.CITYJX">{{city.CITYNAME}}</li>
@@ -50,10 +60,10 @@ export default {
   },
   computed: {
     ...mapGetters('city', ['cityList']),
-    ...mapState('city', ['hotCity'])
+    ...mapState('city', ['hotCity', 'tuijian'])
   },
   methods: {
-    ...mapActions('city', ['getCities']),
+    ...mapActions('city', ['getCities', 'getCityType']),
     ...mapMutations('city', ['setCityjx', 'setFconfigid']),
     // 点击左侧字母右侧滚动到相应位置
     search(py) {
@@ -82,6 +92,10 @@ export default {
       let venueId = city.FCONFIGID
       this.setCityjx(cityId)
       this.setFconfigid(venueId)
+      this.getCityType()
+      this.$nextTick(() => {
+        this.$router.replace({ path: 'main' })
+      })
     }
   },
   created() {

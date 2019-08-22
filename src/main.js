@@ -5,7 +5,11 @@ import store from './store'
 
 Vue.config.productionTip = false
 import './assets/styles/base.scss'
-import { Toast, NavBar, Icon } from 'vant'
+import {
+  Toast,
+  NavBar,
+  Icon
+} from 'vant'
 
 Vue.use(Toast)
   .use(NavBar)
