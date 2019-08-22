@@ -1,7 +1,7 @@
 <template>
   <div class="swiper-container">
     <div class="swiper-wrapper">
-      <div class="swiper-slide" v-for="(img,index) in imgs" :key="index">
+      <div class="swiper-slide" v-for="(img,index) in imgs" :key="index"  @click="ticketD(img)">
         <img :src="`https://static.228.cn${img.IMG}`" alt />
       </div>
     </div>
@@ -17,6 +17,7 @@
 <script>
 import Swiper from 'swiper'
 import 'swiper/dist/css/swiper.css'
+import { mapMutations } from 'vuex'
 export default {
   name: 'Banner',
   props: {
@@ -28,6 +29,7 @@ export default {
     navigation: Boolean
   },
   methods: {
+    ...mapMutations('ticket', ['setProductid']),
     initSwiper() {
       /* 实例轮播图 */
       let swiper = new Swiper('.swiper-container', {
@@ -53,6 +55,18 @@ export default {
       Swiper.use({
         swiper
       })
+    },
+
+    //点击轮播图片 跳转相关详情
+    ticketD(img) {
+      this.$router.push({
+        path: '/ticket',
+        query: {
+          ticket: img.URL
+        }
+      })
+      //点击保存相关购票页id到ticket仓库
+      this.setProductid(img.URL)
     }
   },
 

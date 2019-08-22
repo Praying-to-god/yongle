@@ -67,7 +67,7 @@ export default {
     return {
       botList: [
         { id: 1, name: '收货地址', icon: 'icon-dizhi', href: 'person' },
-        { id: 2, name: '我的收藏', icon: 'icon-ziyuanc', href: 'person' },
+        { id: 2, name: '我的收藏', icon: 'icon-ziyuanc', href: '/collect' },
         { id: 3, name: '我的登记', icon: 'icon-wodedengji', href: 'person' },
         { id: 4, name: '我的提问', icon: 'icon-icon-test', href: 'person' },
         { id: 5, name: '观影凭证', icon: 'icon-pingzheng', href: 'person' }
