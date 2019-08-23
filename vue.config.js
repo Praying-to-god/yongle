@@ -1,17 +1,19 @@
 module.exports = {
   devServer: {
     proxy: {
-      // '/api': {
-      //   target: 'https://m.228.cn',
-      //   ws: true,
-      //   changeOrigin: true,
-      //   pathRewrite: {
-      //     '^/api': ''
-      //   }
-      // }
-      '/api': {
+      '^/api': {
+        target: 'https://m.228.cn',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/api': ''
+        }
+      },
+      '^/abc': {
         target: 'http://localhost:9090',
-        changeOrigin: true
+        changeOrigin: true,
+        pathRewrite: {
+          '^/abc': ''
+        }
       }
     }
   }

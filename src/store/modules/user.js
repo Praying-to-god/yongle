@@ -29,7 +29,7 @@ export default {
   actions: {
     register({ commit }, payload) {
       request
-        .post('/api/sign-up', {
+        .post('/abc/api/sign-up', {
           username: payload.account,
           password: payload.pwd
         })
@@ -38,7 +38,7 @@ export default {
         })
     },
     handleLogin({ commit }, payload) {
-      request.post('/api/sign-in', payload).then(res => {
+      request.post('/abc/api/sign-in', payload).then(res => {
         if (res.code === 0) {
           commit('login', {
             userInfo: res.data.userInfo,
