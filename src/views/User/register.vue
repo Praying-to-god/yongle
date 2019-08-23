@@ -15,19 +15,19 @@
               <label>
                 <input type="text" class="tel" @focus='time' placeholder="请输入手机号" v-model="acc" @input="time" ref="input" id="txt">
                 <span class="test" ref="verify"></span>
-                <i class="iconfont icon-iconzh1 ico-tel"></i>
+                <i class="iconfont icon-wode1 ico-tel"></i>
               </label>
               <label>
                 <input type="password" class="pwd" @input="time" v-model="pwd" placeholder="请输入密码" ref="pwd">
                 <span class="test" ref="verify1"></span>
-                <i class="iconfont icon-mimakai"></i>
-                <i class="iconfont icon-mimasuo ico-tel"></i>
-                <i class="iconfont icon-yanjing_yincang_o"></i>
+                <!-- <i class="iconfont icon-mimakai"></i> -->
+                <i class="iconfont icon-mima ico-tel"></i>
+                <i class="iconfont icon-eye ico-tel2"></i>
               </label>
             </div>
             <div class="exempt_2">
               <label>
-                <i class="iconfont icon-verify"></i>
+                <i class="iconfont icon-anquan ico-tel"></i>
                 <input type="text" class="telCode" placeholder="验证码">
                 <a class="obtain-code red">获取验证码</a>
               </label>
@@ -37,7 +37,7 @@
               <ul>
                 <li><a><i class="iconfont icon-baidu"></i></a></li>
                 <li><a><i class="iconfont icon-weibo"></i></a></li>
-                <li><a><i class="iconfont icon-web-icon-"></i></a></li>
+                <li><a><i class="iconfont icon-qq"></i></a></li>
               </ul>
             </div>
           </form>
@@ -127,6 +127,11 @@
           position: absolute;
           top: 13px;
           left: 25px;
+        }
+        .ico-tel2{
+          position: absolute;
+          top: 13px;
+          right: 25px;
         }
 
         .test{

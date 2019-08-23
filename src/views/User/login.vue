@@ -14,13 +14,13 @@
             <div class="from">
               <label>
                 <input type="text" ref="txt" class="tel" placeholder="手机号">
-                <i class="iconfont icon-iconzh1 ico-tel"></i>
+                <i class="iconfont icon-wode1 ico-tel"></i>
               </label>
               <label>
                 <input type="password" ref="pwd" class="pwd" placeholder="请输入密码">
-                <i class="iconfont icon-mimakai"></i>
-                <i class="iconfont icon-mimasuo ico-tel"></i>
-                <i class="iconfont icon-yanjing_yincang_o"></i>
+                <!-- <i class="iconfont icon-mima"></i> -->
+                <i class="iconfont icon-mima ico-tel"></i>
+                <i class="iconfont icon-eye ico-tel2"></i>
               </label>
             </div>
             <div class="exempt">
@@ -36,7 +36,7 @@
               <ul>
                 <li><a><i class="iconfont icon-baidu"></i></a></li>
                 <li><a><i class="iconfont icon-weibo"></i></a></li>
-                <li><a><i class="iconfont icon-web-icon-"></i></a></li>
+                <li><a><i class="iconfont icon-qq"></i></a></li>
               </ul>
             </div>
           </form>
@@ -121,6 +121,11 @@
           position: absolute;
           top: 13px;
           left: 25px;
+        }
+        .ico-tel2{
+          position: absolute;
+          top: 13px;
+          right: 25px;
         }
 
         .icon-yanjing_yincang_o{
