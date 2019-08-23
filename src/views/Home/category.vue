@@ -1,16 +1,16 @@
 <template>
   <!-- 分类页 -->
   <div class="category">
-    <van-nav-bar
-        title="分类"
-        left-arrow
-        @click-left="onClickLeft"
-        @click-right="onClickRight"
-        >
-        <van-icon name="search" slot="right" color="red"/>
+    <van-nav-bar title="分类" left-arrow @click-left="onClickLeft" @click-right="onClickRight">
+      <van-icon name="search" slot="right" color="red" />
     </van-nav-bar>
-    <searchBar :fcitys="fcitys" :typeas="typeas" @addre="addre" @kinds="kinds" @tim="tim"/>
-  <categoryList :pagerMemorys="pagerMemoryList" :pbgimgs="pbgimgsList" :pageType="pageType" @loadMore="loadMore"/>
+    <searchBar :fcitys="fcitys" :typeas="typeas" @addre="addre" @kinds="kinds" @tim="tim" />
+    <categoryList
+      :pagerMemorys="pagerMemoryList"
+      :pbgimgs="pbgimgsList"
+      :pageType="pageType"
+      @loadMore="loadMore"
+    />
   </div>
 </template>
 
@@ -24,13 +24,28 @@ export default {
     categoryList,
     searchBar
   },
-  computed:{
-    ...mapState('show', ['pagerMemoryList','pbgimgsList','fcitys','typeas','pageType']),
-
+  computed: {
+    ...mapState('show', [
+      'pagerMemoryList',
+      'pbgimgsList',
+      'fcitys',
+      'typeas',
+      'pageType'
+    ])
   },
-    methods: {
-      ...mapMutations('show', ['getAddress','getkinds','gettimes','pushThree']),
-      ...mapActions('show', ['getShowList','getMoreList','getChoiceList','getAgoList']),
+  methods: {
+    ...mapMutations('show', [
+      'getAddress',
+      'getkinds',
+      'gettimes',
+      'pushThree'
+    ]),
+    ...mapActions('show', [
+      'getShowList',
+      'getMoreList',
+      'getChoiceList',
+      'getAgoList'
+    ]),
     onClickLeft() {
       this.$router.back()
       this.pushThree()
@@ -42,32 +57,31 @@ export default {
       })
     },
     //子组件点击获取更多时，请求ajax
-    loadMore(){
+    loadMore() {
       this.getMoreList()
     },
-    addre(a){
-      this.getAddress({add:a});
+    addre(a) {
+      this.getAddress({ add: a })
       this.getChoiceList()
     },
-    kinds(a){
-      this.getkinds({kin:a});
+    kinds(a) {
+      this.getkinds({ kin: a })
       this.getChoiceList()
     },
-    tim(a){
-      this.gettimes({tim:a});
+    tim(a) {
+      this.gettimes({ tim: a })
       this.getChoiceList()
     }
   },
   created() {
-    this.getShowList();
-  },
+    this.getShowList()
+  }
 }
-
 </script>
 
 <style lang="scss" scoped>
-.van-icon-arrow-left::before{
-  color:red;
+.van-icon-arrow-left::before {
+  color: red;
 }
 .van-icon-search:before {
   font-size: 22px;
