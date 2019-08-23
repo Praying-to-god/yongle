@@ -1,24 +1,22 @@
 <template >
     <div class="category-list" v-if="pagerMemorys.length !== 0">
-        
-       
         <ul class="category-list__ul">
             <li class="category-list__item" v-for="item in pagerMemorys" :key="item.isdate">
                 <a href="#" class="goods-con">
                     <div class="left">
                         <img :src="pbgimgs[pagerMemorys.indexOf(item)]" :alt="item.name">
-                        <i :class="item.status==='0'?'gradual-red':(item.status==='1'?'ticket-state-blue':'gradual-gray')" class="tip">{{item.status==='0'?'售票中':(item.status==='1'?'预定':'售完')}}</i>
+                        <i :class="sale(item.status)" class="tip">{{contxt(item.status)}}</i>
                     </div>
                     <div class="right">
-                        <p>{{item.name}}</p>
-                        <span>{{item.begindate.replace(/-/g,'.')+'~'+item.enddate.replace(/-/g,'.')}}</span>
+                        <span v-html="item.name"></span>
+                        <span>{{item.begindate===item.enddate?(item.begindate.replace(/-/g,'.')):(item.begindate.replace(/-/g,'.')+'~'+item.enddate.replace(/-/g,'.'))}}</span>
                         <span>{{item.vname}}</span>
-                        <strong>{{parseInt(item.minprice)+'-'+item.maxprice+'元'}}</strong>
+                        <strong v-if="item.minprice!==''">{{parseInt(item.minprice)+'-'+item.maxprice+'元'}}</strong>
                     </div>
                 </a>
             </li>
         </ul>
-        <div class="lode-more" @click="loadMore"><span>查看更多</span></div>
+        <div class="lode-more" @click="loadMore"><span :style="{color: pageType== 0 ? '#FF2959' : '#000'}">{{pageType === 0 ? '查看更多':'以加载全部'}}</span></div>
     </div>
     <div v-else class="noneMeg">
         <img src="../../../public/ca.jpg" alt="">
@@ -31,14 +29,26 @@
 
 export default {
     name: 'categoryList',
+    data(){
+        return{
+        }
+    },
     props:{
         pagerMemorys:Array,
-        pbgimgs:Array
+        pbgimgs:Array,
+        pageType:Number,
+        highLight:String
     },
     methods: {
-       loadMore(){
-           this.$emit("loadMore");
-       }
+        loadMore(){
+            this.$emit("loadMore");
+        },
+        sale(a){
+            return a==='0'?'gradual-red':(a==='1'?'ticket-state-blue':(a==='3'?'gradual-gold':'gradual-gray'))
+        },
+        contxt(a){
+            return a==='0'?'售票中':(a==='1'?'预定':(a==='3'?'待定':'售完'))
+        }
     },
 }
 </script>
@@ -56,11 +66,9 @@ export default {
         margin: auto;
         background: #fff;
         box-shadow: 0px 2px 6px 0px rgba(255, 58, 86, 0.2);
-    span{
-        background: linear-gradient(to right, #ff7e6f, #ff2959);
-        -webkit-background-clip: text;
-        color: transparent;
     }
+    .red{
+        color:red;
     }
     .category-list__ul{
         width: 335px;
@@ -111,13 +119,16 @@ export default {
         .gradual-gray{
             background: linear-gradient(to left, #8da0a9, #d5dde1 );
         }
+        .gradual-gold{
+            background: linear-gradient(to left, #5052bb, #0a18d8 );
+        }
         }
         .right{
             margin-left: 15px;
             float: left;
             width: calc(100% - 100px);
         }
-        p{
+        span:nth-of-type(1){
             height: 40px;
             line-height: 20px;
             display: block;
@@ -128,13 +139,14 @@ export default {
             -webkit-line-clamp: 2;
             font-weight: bold;
             font-size: 14px;
+            color:#000;
         }
-        span:nth-of-type(1){
+        span:nth-of-type(2){
             font-size: 14px;
             margin-top: 10px;
             margin-bottom: 4px;
         }
-        span:nth-of-type(2){
+        span:nth-of-type(3){
             font-size: 12px;
             margin-bottom: 10px;
         }

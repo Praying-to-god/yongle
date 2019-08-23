@@ -3,8 +3,7 @@
         <ul class="classify-type-ul">
             <!-- 城市分类部分 -->
             <li @click="active('1')" class="classify-type-ul-li">
-                <i></i>
-                {{title_l}}
+                {{title_l}}<i class="iconfont icon-xiala"></i>
                 <div :style="{display: a==1 ? 'block' : 'none'}" class="classify-type-l">
                     <ul >
                         <li @click.stop="addres(''),active(''),ciStyle(0,'全国')"
@@ -20,8 +19,7 @@
             </li>
             <!-- 演出类型部分 -->
             <li @click="active('2')" class="classify-type-ul-li">
-                <i></i>
-                {{title_c}}
+                {{title_c}}<i class="iconfont icon-xiala"></i>
                 <div :style="{display: a==2 ? 'block' : 'none'}" class="classify-type-l">
                     <ul>
                         <li @click.stop="kinds(''),active(''),ksStyle(0,'全部分类')"
@@ -37,8 +35,7 @@
             </li>
             <!-- 演出时间部分 -->
             <li @click="active('3')" class="classify-type-ul-li">
-                <i></i>
-                {{title_r}}
+                {{title_r}}<i class="iconfont icon-xiala"></i>
                 <div :style="{display: a==3 ? 'block' : 'none'}" class="classify-type-l">
                     <ul>
                         <li @click.stop="tim(''),active(''),timStyle(0,'全部时间')"
@@ -99,6 +96,12 @@ export default {
             this.address=a;
             this.cstyle=1;
             this.$emit("addre",this.address);
+            this.$router.push({
+                path: '/category',
+                query:{
+                    a:this.address
+                }
+            })
         },
         kinds(a,b){
             // console.log(a)
@@ -106,11 +109,23 @@ export default {
             this.kind=a
             this.kstyle=1;
             this.$emit("kinds",this.kind);
+            this.$router.push({
+                path: '/category',
+                query:{
+                    b:this.kind
+                }
+            })
         },
         tim(a){
             // console.log(a)
             this.times=a
             this.$emit("tim",this.times);
+            this.$router.push({
+                path: '/category',
+                query:{
+                    c:this.times
+                }
+            })
         },
         timStyle(a,b){
             this.tstyle=a;

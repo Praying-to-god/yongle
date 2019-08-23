@@ -7,15 +7,15 @@
         @click-left="onClickLeft"
         @click-right="onClickRight"
         >
-        <van-icon name="search" slot="right" />
+        <van-icon name="search" slot="right" color="red"/>
     </van-nav-bar>
     <searchBar :fcitys="fcitys" :typeas="typeas" @addre="addre" @kinds="kinds" @tim="tim"/>
-  <categoryList :pagerMemorys="pagerMemoryList" :pbgimgs="pbgimgsList" @loadMore="loadMore"/>
+  <categoryList :pagerMemorys="pagerMemoryList" :pbgimgs="pbgimgsList" :pageType="pageType" @loadMore="loadMore"/>
   </div>
 </template>
 
 <script>
-import { mapActions, mapMutations, mapState, mapGetters } from 'vuex'
+import { mapActions, mapMutations, mapState } from 'vuex'
 import searchBar from '../../components/searchBar'
 import categoryList from '../../components/categoryList'
 
@@ -25,17 +25,21 @@ export default {
     searchBar
   },
   computed:{
-    ...mapState('show', ['pagerMemoryList','pbgimgsList','fcitys','typeas']),
+    ...mapState('show', ['pagerMemoryList','pbgimgsList','fcitys','typeas','pageType']),
 
   },
     methods: {
-      ...mapMutations('show', ['getAddress','getkinds','gettimes']),
-      ...mapActions('show', ['getShowList','getMoreList','getChoiceList']),
+      ...mapMutations('show', ['getAddress','getkinds','gettimes','pushThree']),
+      ...mapActions('show', ['getShowList','getMoreList','getChoiceList','getAgoList']),
     onClickLeft() {
-      Toast('返回');
+      this.$router.back()
+      this.pushThree()
+      this.getAgoList()
     },
     onClickRight() {
-      Toast('按钮');
+      this.$router.push({
+        path: '/search'
+      })
     },
     //子组件点击获取更多时，请求ajax
     loadMore(){
@@ -56,12 +60,16 @@ export default {
   },
   created() {
     this.getShowList();
-    // console.log(fcitys());
   },
 }
 
 </script>
 
 <style lang="scss">
-
+.van-icon-arrow-left::before{
+  color:red;
+}
+.van-icon-search:before {
+  font-size: 22px;
+}
 </style>
