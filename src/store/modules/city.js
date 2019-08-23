@@ -83,18 +83,10 @@ export default {
 
         if (res.result.code == 1) {
           commit({
-              // 进行对仓库state赋值处理
-              type: 'setTuijian',
-              tuijian: res.data.recommendPage.list
-            }),
-            commit({
-              type: 'setbannerList',
-              bannerList: res.data.slideList.splice(0, 5)
-            }),
-            commit({
-              type: 'setdizhi',
-              dizhi: res.data.fconfig.CITYNAME
-            })
+            type: 'setCities',
+            cities: res.data.fcitys,
+            hotCity: res.data.hotCitys
+          })
         }
       })
     },

@@ -5,7 +5,7 @@
     <div class="main-head">
       <router-link to="/city" class="main-city">
         <span>{{dizhi}}</span>
-        <i class="iconfont icon-below-s"></i>
+        <i class="iconfont icon-xiala"></i>
       </router-link>
       <div class="main-search">
         <router-link to="/search">
@@ -115,7 +115,7 @@ export default {
     text-align: center;
     color: white;
     i {
-      font-size: 5px;
+      font-size: 20px;
       margin-left: 8px;
     }
   }

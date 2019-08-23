@@ -21,19 +21,17 @@
     </div>
     <div>
       <div class="subject-list">
-        <a href="#" class="goods-con" v-for="(item,index) in 4" :key="index">
+        <a href="#" class="goods-con" v-for="(item,index) in list" :key="index">
           <div class="left">
-            <img
-              src="//static.228.cn/upload/2019/06/20/AfterTreatment/1561018126947_k2p5-0.jpg!t90x120.jpg"
-            />
+            <img :src="`https://static.228.cn${item.PSMILLIMG}`" />
             <i class="gradual-red tip tip-grabSeat">售票中</i>
           </div>
           <div class="right">
-            <b class="name">Olive橄榄现场呈现·2019谢春花"无声叛逆"全国巡回演出</b>
-            <span class="spanone">2019-08-23</span>
-            <span class="spantwo">重庆江南体育馆</span>
+            <b class="name">{{item.NAME}}</b>
+            <span class="spanone">{{item.SHOWDATE}}</span>
+            <span class="spantwo">{{item.VNAME}}</span>
             <span class="spanthree">
-              <b class="red">280 - 699元</b>
+              <b class="red">{{item.MINPRICE}} - {{item.MAXPRICE}}元</b>
             </span>
           </div>
         </a>
@@ -47,11 +45,14 @@ import request from '../../utils/request'
 export default {
   name: 'Subject',
   data() {
-    return {}
+    return {
+      list: []
+    }
   },
   created() {
     request.get('/api/server/subject/detail-xiechunhua0621.json').then(res => {
       console.log(res)
+      this.list = res.data.subjectProductList
     })
   }
 }
