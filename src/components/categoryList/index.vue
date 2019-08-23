@@ -1,7 +1,8 @@
 <template >
     <div class="category-list" v-if="pagerMemorys.length !== 0">
         <ul class="category-list__ul">
-            <li class="category-list__item" v-for="item in pagerMemorys" :key="item.isdate">
+            <!-- 添加点击事件 跳转相关购票详情 -->
+            <li class="category-list__item" v-for="item in pagerMemorys" :key="item.isdate"  @click="ticketD(item)">
                 <a href="#" class="goods-con">
                     <div class="left">
                         <img :src="pbgimgs[pagerMemorys.indexOf(item)]" :alt="item.name">
@@ -26,7 +27,7 @@
 </template>
 
 <script>
-
+import { mapMutations } from 'vuex'
 export default {
     name: 'categoryList',
     data(){
@@ -48,8 +49,21 @@ export default {
         },
         contxt(a){
             return a==='0'?'售票中':(a==='1'?'预定':(a==='3'?'待定':'售完'))
-        }
+        },
+    ticketD(item) {
+        this.$router.push({
+            path: '/ticket',
+            query: {
+            ticket: item.productid
+            }
+        })
+      //点击保存相关购票页id到ticket仓库
+        this.setProductid(item.productid)
+    }
+
     },
+    //跳转到相关购票页面
+    
 }
 </script>
 <style lang="scss">
@@ -160,22 +174,88 @@ export default {
             font-weight: bold;
         }
     }
-.noneMeg{
-    margin-top: 20px;
-    margin-bottom: 40px;
-    line-height: 30px;
-    text-align: center;
-    img{
-        width: 140px;
+    img {
+      width: 100%;
+      position: absolute;
     }
-    p:nth-of-type(1){
-        font-size: 14px;
-        color:#999;
-        font-weight: 900;
+    .tip {
+      display: block;
+      height: 20px;
+      line-height: 20px;
+      color: #fff;
+      font-style: normal;
+      position: absolute;
+      top: 0;
+      font-size: 11px;
+      font-weight: bold;
+      border-radius: 10px 0;
+      padding: 0 5px;
+      left: 0;
+      text-align: center;
     }
-    p:nth-of-type(2){
-        font-size: 14px;
-        color:#999;
+    .ticket-state-blue {
+      background: linear-gradient(to right, #3dd9c1, #00a0c2);
     }
+    .gradual-red {
+      background: linear-gradient(to right, #ff7e6f, #ff2959);
+      box-shadow: 0px 2px 6px 0px rgba(255, 37, 68, 0.2);
+    }
+    .gradual-gray {
+      background: linear-gradient(to left, #8da0a9, #d5dde1);
+    }
+
+.right {
+    margin-left: 15px;
+    float: left;
+    width: calc(100% - 100px);
+  }
+  p {
+    height: 40px;
+    line-height: 20px;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    font-weight: bold;
+    font-size: 14px;
+  }
+  span:nth-of-type(1) {
+    font-size: 14px;
+    margin-top: 10px;
+    margin-bottom: 4px;
+  }
+  span:nth-of-type(2) {
+    font-size: 12px;
+    margin-bottom: 10px;
+  }
+  span {
+    display: block;
+    color: #999ea3;
+  }
+  strong {
+    color: #ff3a56;
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+.noneMeg {
+  margin-top: 20px;
+  margin-bottom: 40px;
+  line-height: 30px;
+  text-align: center;
+  img {
+    width: 140px;
+  }
+  p:nth-of-type(1) {
+    font-size: 14px;
+    color: #999;
+    font-weight: 900;
+  }
+  p:nth-of-type(2) {
+    font-size: 14px;
+    color: #999;
+  }
 }
 </style>

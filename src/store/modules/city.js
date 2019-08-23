@@ -10,7 +10,7 @@ export default {
     bannerList: [], //存储轮播图数据
     tuijian: [], //存储推荐的数据
     gymList: [], //存储场馆数据
-    dizhi: [] //存储定位地址
+    dizhi: '' //存储定位地址
   },
   getters: {
     //对城市数据进行处理
@@ -65,6 +65,10 @@ export default {
     //修改头图的地址
     setdizhi(state, payload) {
       state.dizhi = payload.dizhi
+    },
+    //清空城市数据
+    clearcities(state) {
+      state.cities = []
     }
   },
   actions: {
@@ -72,61 +76,49 @@ export default {
     getCities({
       commit
     }) {
-      request
-        .get('http://localhost:16659/api/server/content/city/list.json')
-        .then(res => {
-          console.log(res.data.fcitys)
-          console.log(res.data.hotCitys)
-          // console.log(res.data.hotCitys.PRODUCTNUM)
+      request.get('/api/server/content/city/list.json').then(res => {
+        console.log(res.data.fcitys)
+        console.log(res.data.hotCitys)
+        // console.log(res.data.hotCitys.PRODUCTNUM)
 
-          if (res.result.code == 1) {
-            commit({
-              type: 'setCities',
-              cities: res.data.fcitys,
-              hotCity: res.data.hotCitys
-            })
-          }
-        })
+        if (res.result.code == 1) {
+          commit({
+            type: 'setCities',
+            cities: res.data.fcitys,
+            hotCity: res.data.hotCitys
+          })
+        }
+      })
     },
     // 获取选择城市首页数据
     getCityType({
       commit,
       state
     }) {
-      if (state.tuijian.length == 0) {
-        request
-          .get(
-            `http://localhost:23220/api/server/content/city/sz.json`
-          )
-          .then(res => {
-
-            console.log(res)
-            console.log(state.cityjx)
-            if (res.result.code == 1) {
+      if (state.cities.length == 0) {
+        request.get(`/api/server/content/city/sz.json`).then(res => {
+          console.log(res)
+          console.log(state.cityjx)
+          if (res.result.code == 1) {
+            commit({
+                // 进行对仓库state赋值处理
+                type: 'setTuijian',
+                tuijian: res.data.recommendPage.list
+              }),
               commit({
-                  // 进行对仓库state赋值处理
-                  type: 'setTuijian',
-                  tuijian: res.data.recommendPage.list
-                }),
-                commit({
-                  type: 'setbannerList',
-                  bannerList: res.data.slideList.splice(0, 5)
-                }),
-                commit({
-                  type: 'setdizhi',
-                  dizhi: res.data.fconfig.CITYNAME
-                })
-            }
-          })
+                type: 'setbannerList',
+                bannerList: res.data.slideList.splice(0, 5)
+              }),
+              commit({
+                type: 'setdizhi',
+                dizhi: res.data.fconfig.CITYNAME
+              })
+          }
+        })
       } else {
         request
-          .get(
-            `http://localhost:23220/api/server/content/city/${state.cityjx}.json`
-          )
+          .get(`/api/server/content/city/${state.cityjx}.json`)
           .then(res => {
-
-            console.log(res)
-            console.log(state.cityjx)
             if (res.result.code == 1) {
               commit({
                 // 进行对仓库state赋值处理
@@ -150,14 +142,12 @@ export default {
       commit,
       state
     }) {
-      if (state.gymList.length == 0) {
+      if (state.cities.length == 0) {
         request
           .get(
-            `http://localhost:23220/api/server/content/moreProductPlay.json?fcity=131054&pageNum=1&type=1`
+            `/api/server/content/moreProductPlay.json?fcity=131054&pageNum=1&type=1`
           )
           .then(res => {
-            console.log(res)
-            console.log(state.fconfigid)
             if (res.result.code == 1) {
               commit({
                 // 进行对仓库state赋值处理
@@ -169,11 +159,9 @@ export default {
       } else {
         request
           .get(
-            `http://localhost:23220/api/server/content/moreProductPlay.json?fcity=${state.fconfigid}&pageNum=1&type=1`
+            `/api/server/content/moreProductPlay.json?fcity=${state.fconfigid}&pageNum=1&type=1`
           )
           .then(res => {
-            console.log(res)
-            console.log(state.fconfigid)
             if (res.result.code == 1) {
               commit({
                 // 进行对仓库state赋值处理

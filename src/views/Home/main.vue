@@ -5,7 +5,7 @@
     <div class="main-head">
       <router-link to="/city" class="main-city">
         <span>{{dizhi}}</span>
-        <i class="iconfont icon-below-s"></i>
+        <i class="iconfont icon-xiala"></i>
       </router-link>
       <div class="main-search">
         <router-link to="/search">
@@ -57,7 +57,7 @@
     </div>
     <!-- 谢春花链接 -->
     <div class="first-pay-first">
-      <router-link to="#">
+      <router-link to="/subject">
         <img src="https://static.228.cn/upload/2019/06/21/1561085435056_e4a0_m1.jpg" alt />
       </router-link>
     </div>
@@ -115,7 +115,7 @@ export default {
     text-align: center;
     color: white;
     i {
-      font-size: 5px;
+      font-size: 20px;
       margin-left: 8px;
     }
   }

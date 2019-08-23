@@ -2,27 +2,28 @@
   <!-- 城市列表页 -->
   <div class="city-list">
     <div class="title">
-      <router-link to="/main">
+      <div @click="ret">
         <span class="iconfont icon-fanhuizuojiantouxiangzuoshangyibuxianxing"></span>
-      </router-link>
+      </div>
       <h3>选择演出城市</h3>
       <i></i>
     </div>
     <div class="city-con">
       <div class="left" ref="leftBox">
-        <div class="current_city">
+        <!-- <div class="current_city">
           <h4>当前城市</h4>
           <span class="active">{{this.cityName}}</span>
-        </div>
+        </div>-->
         <h4>热门城市</h4>
         <div class="hot_city">
           <span>全国</span>
-          <span
+          <!-- <span
             v-for="i in hotCity"
             :key="i.CITYJX"
             @click="choiceHot(i)"
             :class="{'active': i.JXNAME == cityName}"
-          >{{i.JXNAME}}</span>
+          >{{i.JXNAME}}</span>-->
+          <span v-for="i in hotCity" :key="i.CITYJX" @click="choiceHot(i)">{{i.JXNAME}}</span>
         </div>
         <h4>更多城市</h4>
         <ul class="more_city">
@@ -34,7 +35,11 @@
           >
             <ul class="more_con">
               <i class="more_title">{{item.py}}</i>
-              <li v-for="city in item.list" :key="city.CITYJX">{{city.CITYNAME}}</li>
+              <li
+                v-for="city in item.list"
+                :key="city.CITYJX"
+                @click="dianji(city)"
+              >{{city.CITYNAME}}</li>
             </ul>
           </li>
         </ul>
@@ -64,7 +69,7 @@ export default {
   },
   methods: {
     ...mapActions('city', ['getCities', 'getCityType']),
-    ...mapMutations('city', ['setCityjx', 'setFconfigid']),
+    ...mapMutations('city', ['setCityjx', 'setFconfigid', 'clearcities']),
     // 点击左侧字母右侧滚动到相应位置
     search(py) {
       let itemLi = this.$refs[`item-${py}`][0]
@@ -85,6 +90,27 @@ export default {
       this.setCityjx(cityId)
       this.setFconfigid(venueId)
     },
+    //点击返回按钮
+    ret() {
+      this.clearcities()
+      this.getCityType()
+      this.$nextTick(() => {
+        this.$router.push({ path: 'main' })
+      })
+    },
+    //点击更多城市跳转
+    dianji(city) {
+      this.cityName = city.JXNAME
+      let cityId = city.CITYJX
+      let venueId = city.FCONFIGID
+      this.setCityjx(cityId)
+      this.setFconfigid(venueId)
+
+      this.getCityType()
+      this.$nextTick(() => {
+        this.$router.push({ path: 'main' })
+      })
+    },
     // 获取点击热门城市信息
     choiceHot(city) {
       this.cityName = city.JXNAME
@@ -94,7 +120,7 @@ export default {
       this.setFconfigid(venueId)
       this.getCityType()
       this.$nextTick(() => {
-        this.$router.replace({ path: 'main' })
+        this.$router.push({ path: 'main' })
       })
     }
   },

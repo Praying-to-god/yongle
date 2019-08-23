@@ -13,31 +13,31 @@
           <form id="form">
             <div class="from">
               <label>
-                <input type="text" class="tel" placeholder="请输入账号" ref="input" id="txt">
+                <input type="text" class="tel" @focus='time' placeholder="请输入手机号" v-model="acc" @input="time" ref="input" id="txt">
                 <span class="test" ref="verify"></span>
-                <i class="iconfont icon-iconzh1 ico-tel"></i>
+                <i class="iconfont icon-wode1 ico-tel"></i>
               </label>
               <label>
-                <input type="password" class="pwd" placeholder="请输入密码" ref="pwd">
+                <input type="password" class="pwd" @input="time" v-model="pwd" placeholder="请输入密码" ref="pwd">
                 <span class="test" ref="verify1"></span>
-                <i class="iconfont icon-mimakai"></i>
-                <i class="iconfont icon-mimasuo ico-tel"></i>
-                <i class="iconfont icon-yanjing_yincang_o"></i>
+                <!-- <i class="iconfont icon-mimakai"></i> -->
+                <i class="iconfont icon-mima ico-tel"></i>
+                <i class="iconfont icon-eye ico-tel2"></i>
               </label>
             </div>
             <div class="exempt_2">
               <label>
-                <i class="iconfont icon-verify"></i>
+                <i class="iconfont icon-anquan ico-tel"></i>
                 <input type="text" class="telCode" placeholder="验证码">
                 <a class="obtain-code red">获取验证码</a>
               </label>
             </div>
-            <div class="login-btn" @click="test">注册</div>
+            <div class="login-btn" @click="registerBtn">注册</div>
             <div class="other-login-type">
               <ul>
                 <li><a><i class="iconfont icon-baidu"></i></a></li>
                 <li><a><i class="iconfont icon-weibo"></i></a></li>
-                <li><a><i class="iconfont icon-web-icon-"></i></a></li>
+                <li><a><i class="iconfont icon-qq"></i></a></li>
               </ul>
             </div>
           </form>
@@ -127,6 +127,11 @@
           position: absolute;
           top: 13px;
           left: 25px;
+        }
+        .ico-tel2{
+          position: absolute;
+          top: 13px;
+          right: 25px;
         }
 
         .test{
@@ -277,34 +282,53 @@
 
 <script>
 import { mapState,mapMutations,mapActions } from 'vuex'
+import { Toast } from 'vant'
+import router from '../../router'
 export default {
   name: 'Register',
+  data() {
+    return {
+      acc: '',
+      pwd: ''
+    }
+  },
   methods: {
-    ...mapActions('user',['getacc']),
-    ...mapMutations('user',['store']),
-    test(){
-      var uPattern = /^[a-zA-Z0-9_-]{4,16}$/
-      if(this.$refs.input.value === '' || this.$refs.pwd.value === ''){
-        this.$refs.verify.innerHTML = '账号不能为空'
+    ...mapActions('user', ['register']),
+    time(){
+      let account = this.$refs.input.value
+      let pwd = this.$refs.pwd.value
+      // 账号
+      let phone = /^1(3|4|5|7|8)\d{9}$/
+      if(this.acc == ''){
+        this.$refs.verify.innerHTML = '手机号不能为空'
+      }else if(this.acc.length < 4 && this.acc.length>0){
+        this.$refs.verify.innerHTML = ''
+      } else if(!phone.test(account)){
+        this.$refs.verify.innerHTML = '请输入正确的手机号'
+      } else if(phone.test(account)){
+        this.$refs.verify.innerHTML = ''
+      }
+      // 密码
+      if(this.pwd == ''){
         this.$refs.verify1.innerHTML = '密码不能为空'
       } else {
-        let getzh = this.$refs.input.value
-        let getpwd = this.$refs.pwd.value
-        if(uPattern.test(this.$refs.input.valuet) && uPattern.test(this.$refs.pwd.valuet)){
-          this.$refs.verify.innerHTML = ''
-          this.$refs.verify1.innerHTML = ''
-          this.getacc({account1:getzh, password1:getpwd})
-          alert('注册成功')
-          this.$router.push('/login')
-        } else {
-          this.$refs.verify.innerHTML = '账号/密码错误'
-          this.$refs.verify1.innerHTML = '账号/密码错误'
-        }
+        this.$refs.verify1.innerHTML = ''
+      }
+    },
+    registerBtn() {
+      let account = this.$refs.input.value
+      let pwd = this.$refs.pwd.value
+      let phone = /^1(3|4|5|7|8)\d{9}$/
+      if(phone.test(account) && !pwd == ''){
+        Toast.success('注册成功')
+        router.replace('/login')
+        this.register({account,pwd})
       }
     }
   },
-  mounted() {
-    this.store()
+  
+  updated() {
+    this.time()
   }
 }
 </script>
