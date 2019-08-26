@@ -3,7 +3,9 @@
   <div class="city-list">
     <div class="title">
       <div @click="ret">
-        <span class="iconfont icon-fanhuizuojiantouxiangzuoshangyibuxianxing"></span>
+        <span
+          class="iconfont icon-fanhuizuojiantouxiangzuoshangyibuxianxing"
+        ></span>
       </div>
       <h3>选择演出城市</h3>
       <i></i>
@@ -13,7 +15,7 @@
         <!-- <div class="current_city">
           <h4>当前城市</h4>
           <span class="active">{{this.cityName}}</span>
-        </div>-->
+        </div> -->
         <h4>热门城市</h4>
         <div class="hot_city">
           <span>全国</span>
@@ -23,23 +25,27 @@
             @click="choiceHot(i)"
             :class="{'active': i.JXNAME == cityName}"
           >{{i.JXNAME}}</span>-->
-          <span v-for="i in hotCity" :key="i.CITYJX" @click="choiceHot(i)">{{i.JXNAME}}</span>
+          <span v-for="i in hotCity" :key="i.CITYJX" @click="choiceHot(i)">{{
+            i.JXNAME
+          }}</span>
         </div>
         <h4>更多城市</h4>
         <ul class="more_city">
           <li
             v-for="item in cityList"
             :key="item.py"
-            :ref="'item-'+item.py"
+            :ref="'item-' + item.py"
             @click="choice(item.list)"
           >
             <ul class="more_con">
-              <i class="more_title">{{item.py}}</i>
+              <i class="more_title">{{ item.py }}</i>
               <li
                 v-for="city in item.list"
                 :key="city.CITYJX"
                 @click="dianji(city)"
-              >{{city.CITYNAME}}</li>
+              >
+                {{ city.CITYNAME }}
+              </li>
             </ul>
           </li>
         </ul>
@@ -47,7 +53,9 @@
       <div class="right">
         <ul>
           <li @click="istop">#</li>
-          <li v-for="i in cityList" :key="i.py" @click="search(i.py)">{{i.py}}</li>
+          <li v-for="i in cityList" :key="i.py" @click="search(i.py)">
+            {{ i.py }}
+          </li>
         </ul>
       </div>
     </div>

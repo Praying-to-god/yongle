@@ -1,26 +1,33 @@
 <template>
   <div>
     <h3 class="con-tit">
-      <b @click="fn1(0)" :class="{active:cur==0}">推荐</b>
-      <b @click="fn1(1)" :class="{active:cur==1}">场馆</b>
+      <b @click="fn1(0)" :class="{ active: cur == 0 }">推荐</b>
+      <b @click="fn1(1)" :class="{ active: cur == 1 }">场馆</b>
     </h3>
-    <ul v-show="cur==0" class="recommend">
+    <ul v-show="cur == 0" class="recommend">
       <!-- 绑定点击事件 点击时跳转相关购票详情 -->
-      <li v-for="(item,index) in recommendlist " :key="index"  @click="ticketD(item)">
-          <img :src="`https://static.228.cn${item.PBIGIMG}`" alt />
-          <b class="recommend-name">{{item.NAME}}</b>
-          <span class="recommend-data">{{item.BEGINDATE.replace(/-/g,'.').substring(0,10)}}</span>
-          <span class="recommend-price-one">
-            <b class="recommend-price">¥ {{item.MINPRICE}}</b>起
-          </span>
+      <li
+        v-for="(item, index) in recommendlist"
+        :key="index"
+        @click="ticketD(item)"
+      >
+        <img :src="`https://static.228.cn${item.PBIGIMG}`" alt />
+        <b class="recommend-name">{{ item.NAME }}</b>
+        <span class="recommend-data">{{
+          item.BEGINDATE.replace(/-/g, '.').substring(0, 10)
+        }}</span>
+        <span class="recommend-price-one">
+          <b class="recommend-price">¥ {{ item.MINPRICE }}</b
+          >起
+        </span>
       </li>
     </ul>
-    <ul v-show="cur==1" class="gym">
-      <li v-for="(item,index) in gymList " :key="index">
+    <ul v-show="cur == 1" class="gym">
+      <li v-for="(item, index) in gymList" :key="index">
         <a href="#">
           <img :src="`https://static.228.cn${item.IMG}`" alt />
-          <b>{{item.VNAME}}</b>
-          <span>{{item.ADDRESS}}</span>
+          <b>{{ item.VNAME }}</b>
+          <span>{{ item.ADDRESS }}</span>
         </a>
       </li>
     </ul>
@@ -49,8 +56,6 @@ export default {
           ticket: item.PRODUCTID
         }
       })
-      //点击保存相关购票页id到ticket仓库
-      this.setProductid(item.PRODUCTID)
     }
   }
 }

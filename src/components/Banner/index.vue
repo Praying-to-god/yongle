@@ -1,7 +1,12 @@
 <template>
   <div class="swiper-container">
     <div class="swiper-wrapper">
-      <div class="swiper-slide" v-for="(img,index) in imgs" :key="index"  @click="ticketD(img)">
+      <div
+        class="swiper-slide"
+        v-for="(img, index) in imgs"
+        :key="index"
+        @click="ticketD(img)"
+      >
         <img :src="`https://static.228.cn${img.IMG}`" alt />
       </div>
     </div>

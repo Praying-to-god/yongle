@@ -4,63 +4,103 @@
     <div class="head">
       <div class="head_bg">
         <div class="bgImg">
-          <div class="bgImgBg" :style="{backgroundImage:'url(//static.228.cn'+ticket.PBIGIMG+')'}"></div>
+          <div
+            class="bgImgBg"
+            :style="{
+              backgroundImage: 'url(//static.228.cn' + ticket.PBIGIMG + ')'
+            }"
+          ></div>
         </div>
       </div>
       <div class="head-icon">
-          <p class="back" @click="goBack">
-            <span class="iconfont icon-xiangzuoyuanjiantouzuojiantouxiangzuomianxing"></span>
-          </p>
-          <div>
-            <!-- 点击事件 喜欢功能 -->
-            <i class="iconfont" :class="xXing?'icon-xingxing':'icon-starIcon'" :style="xXing?'':'color:#e66aa4'" @click="isLive"></i>
-            <a href="#">
-              <i class="iconfont icon-fenxiang1"></i>
-            </a>
-          </div>
+        <p class="back" @click="goBack">
+          <span
+            class="iconfont icon-xiangzuoyuanjiantouzuojiantouxiangzuomianxing"
+          ></span>
+        </p>
+        <div>
+          <!-- 点击事件 喜欢功能 -->
+          <i
+            class="iconfont"
+            :class="xXing ? 'icon-xingxing' : 'icon-starIcon'"
+            :style="xXing ? '' : 'color:#e66aa4'"
+            @click="isLive"
+          ></i>
+          <a href="#">
+            <i class="iconfont icon-fenxiang1"></i>
+          </a>
+        </div>
       </div>
       <div class="head-con">
         <div class="left">
-           <img :src="`//static.228.cn${ticket.PBIGIMG}`"  alt="">
-          <i class="tip" 
-          :class="ticket.STATUS===0?'gradual-red':(ticket.STATUS===1?'ticket-state-blue':(ticket.STATUS===3?'gradual-gold':'gradual-gray'))" >
-            {{ticket.STATUS===0?'售票中':(ticket.STATUS===1?'预定':(ticket.STATUS===3?'待定':'售完'))}}</i>
+          <img :src="`//static.228.cn${ticket.PBIGIMG}`" alt />
+          <i
+            class="tip"
+            :class="
+              ticket.STATUS === 0
+                ? 'gradual-red'
+                : ticket.STATUS === 1
+                ? 'ticket-state-blue'
+                : ticket.STATUS === 3
+                ? 'gradual-gold'
+                : 'gradual-gray'
+            "
+            >{{
+              ticket.STATUS === 0
+                ? '售票中'
+                : ticket.STATUS === 1
+                ? '预定'
+                : ticket.STATUS === 3
+                ? '待定'
+                : '售完'
+            }}</i
+          >
         </div>
         <div class="right">
-          <h3>{{ticket.NAME}}</h3>
+          <h3>{{ ticket.NAME }}</h3>
           <b>
-            <em>￥</em>{{ticket.MINPRICE}} -
-            <em>￥</em>{{ticket.MAXPRICE}}
+            <em>￥</em>
+            {{ ticket.MINPRICE }} -
+            <em>￥</em>
+            {{ ticket.MAXPRICE }}
           </b>
         </div>
-      </div>  
+      </div>
     </div>
     <div class="pad">
       <div class="tiemore">
-          <a href="#">
-            <p>
-              <i class="iconfont icon-weizhi"></i>
-              <span><b>{{ticket.BEGINDATE}}</b>
-                -&nbsp;<b>{{ticket.ENDDATE}}</b></span>
-            </p>
-            <p>
-              <i class="iconfont icon-shijian"></i>
-              <span>{{ticket.VNAME}}</span>
-            </p>
-            
-          </a>
-          <em class="iconfont icon-xiangyou"></em>
+        <a href="#">
+          <p>
+            <i class="iconfont icon-weizhi"></i>
+            <span>
+              <b>{{ ticket.BEGINDATE }}</b>
+              -&nbsp;
+              <b>{{ ticket.ENDDATE }}</b>
+            </span>
+          </p>
+          <p>
+            <i class="iconfont icon-shijian"></i>
+            <span>{{ ticket.VNAME }}</span>
+          </p>
+        </a>
+        <em class="iconfont icon-xiangyou"></em>
       </div>
       <h4>注意事项</h4>
       <div class="need-attention" v-html="ticket.PRECAUTIONS">
-        {{ticket.PRECAUTIONS}}
+        {{ ticket.PRECAUTIONS }}
       </div>
       <h4>演出详情</h4>
-      <div class="details" :style="isShow?classA:classB" v-html="ticket.INTRODUCTION">
-        {{ticket.INTRODUCTION}}
+      <div
+        class="details"
+        :style="isShow ? classA : classB"
+        v-html="ticket.INTRODUCTION"
+      >
+        {{ ticket.INTRODUCTION }}
       </div>
       <div class="tc">
-        <span @click="switchDepartment">{{isShow?'收起':'查看更多'}}</span>
+        <span @click="switchDepartment">{{
+          isShow ? '收起' : '查看更多'
+        }}</span>
       </div>
       <div class="answer">
         <span>FAQ</span>
@@ -102,10 +142,12 @@ export default {
     }
   },
   computed: {
-    ...mapState('ticket', ['ticket'])
+    ...mapState('ticket', ['ticket']),
+    ...mapState('show', ['ticket'])
   },
   methods: {
     ...mapActions('ticket', ['getTicket']),
+    ...mapActions('show', ['getDetail']),
     //控制演出详情更多内容的显示隐藏
     switchDepartment() {
       this.isShow = !this.isShow
@@ -127,6 +169,7 @@ export default {
   },
   created() {
     this.getTicket()
+    this.getDetail(this.$route.query.ticket)
   }
 }
 </script>

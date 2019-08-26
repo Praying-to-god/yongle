@@ -3,41 +3,46 @@
   <div class="profile">
     <div class="title">
       <router-link to="/person">
-      <span class="iconfont icon-fanhuizuojiantouxiangzuoshangyibuxianxing"></span>
-       </router-link>
-      <h2>账号管理</h2>   
-      <i></i>   
+        <span
+          class="iconfont icon-fanhuizuojiantouxiangzuoshangyibuxianxing"
+        ></span>
+      </router-link>
+      <h2>账号管理</h2>
+      <i></i>
     </div>
     <div class="con">
       <label>
-        <b>昵称
-        <span style="padding-left:52px">X******</span>
+        <b
+          >昵称
+          <span style="padding-left:52px">X******</span>
         </b>
       </label>
       <label>
-        <b>注册手机
-        <span>X******</span>
+        <b
+          >注册手机
+          <span>X******</span>
         </b>
       </label>
-       <label>
-        <b>注册邮箱
-        <span>无</span>
+      <label>
+        <b
+          >注册邮箱
+          <span>无</span>
         </b>
       </label>
       <label>
         <b>收货地址</b>
         <p>
           <a href="#">
-          <em>未认证</em>
-          <i class="iconfont icon-xiangyou"></i>
+            <em>未认证</em>
+            <i class="iconfont icon-xiangyou"></i>
           </a>
         </p>
       </label>
       <label v-for="item in mes" :key="item.id">
-        <b>{{item.name}}</b>
+        <b>{{ item.name }}</b>
         <p>
           <a href="#">
-          <i class="iconfont icon-xiangyou"></i>
+            <i class="iconfont icon-xiangyou"></i>
           </a>
         </p>
       </label>
@@ -62,19 +67,19 @@ export default {
     }
   },
   computed: {
-    ...mapState('user',['userInfo'])
+    ...mapState('user', ['userInfo'])
   },
   methods: {
     ...mapMutations('user', ['EmptyOnExit']),
     quit() {
-        localStorage.clear()
-        this.EmptyOnExit(null)
-        router.replace('/main')
+      localStorage.clear()
+      this.EmptyOnExit(null)
+      router.replace('/main')
     }
   },
   updated() {
     this.quit()
-  },
+  }
 }
 </script>
 

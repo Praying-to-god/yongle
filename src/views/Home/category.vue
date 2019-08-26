@@ -1,10 +1,21 @@
 <template>
   <!-- 分类页 -->
   <div class="category">
-    <van-nav-bar title="分类" left-arrow @click-left="onClickLeft" @click-right="onClickRight">
+    <van-nav-bar
+      title="分类"
+      left-arrow
+      @click-left="onClickLeft"
+      @click-right="onClickRight"
+    >
       <van-icon name="search" slot="right" color="red" />
     </van-nav-bar>
-    <searchBar :fcitys="fcitys" :typeas="typeas" @addre="addre" @kinds="kinds" @tim="tim" />
+    <searchBar
+      :fcitys="fcitys"
+      :typeas="typeas"
+      @addre="addre"
+      @kinds="kinds"
+      @tim="tim"
+    />
     <categoryList
       :pagerMemorys="pagerMemoryList"
       :pbgimgs="pbgimgsList"
@@ -47,7 +58,6 @@ export default {
       'getAgoList'
     ]),
     onClickLeft() {
-      this.$router.back()
       this.pushThree()
       this.getAgoList()
     },
@@ -79,7 +89,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .van-icon-arrow-left::before {
   color: red;
 }

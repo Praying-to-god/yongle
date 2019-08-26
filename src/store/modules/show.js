@@ -31,7 +31,8 @@ export default {
     threeStr: '', //分类页三级联动数据拼接
     lastW: '', //获取最后一个拼接用地址
     //=========================================================搜索页==========================================================
-    searchWords: '' //关键字搜索
+    searchWords: '', //关键字搜索
+    ticket: [] //详情页数据
   },
   getters: {},
   //********************************************mutations****************************************/
@@ -77,7 +78,6 @@ export default {
         state.address = '-' + payload.add
         state.address2 = payload.add + '-'
       }
-      // console.log(state.address)
     },
     //获取种类-------------------------------------------->
     getkinds(state, payload) {
@@ -102,7 +102,6 @@ export default {
     //获取更多按钮控制
     pageType(state, payload) {
       state.pageType = payload.a
-      console.log(state.pageType)
     },
     //==================================================================搜索页================================================================
     getSearchWords(state, payload) {
@@ -125,18 +124,15 @@ export default {
       state.totalPages = payload.totalPages
     },
     setThree(state, payload) {
-      //     threeWords: [], //分类页三级联动数据汇整
-      // threeStr: '', //分类页三级联动数据拼接
-      // ${state.address}${state.kind}${state.times}
       state.threeStr = payload.a + payload.b + payload.c
       state.threeArr.push(state.threeStr)
-      // console.log(state.threeStr, state.threeArr)
     },
     pushThree(state) {
-      // state.threeArr.pop()
-      // state.threeArrTrue = state.threeArr
       state.lastW = state.threeArr.pop()
-      console.log(state.lastW, state.threeArr)
+    },
+    //详情页
+    getDeti(state, payload) {
+      state.ticket = payload.a
     }
   },
   //********************************************actions****************************************/
@@ -217,7 +213,6 @@ export default {
           }
         )
         .then(res => {
-          console.log(res)
           if (res.result.code == 1) {
             commit({
               type: 'setMorePagerMemorys',
@@ -302,7 +297,6 @@ export default {
           }${encodeURI(state.searchWords)}.json`
         )
         .then(res => {
-          console.log(res.data)
           if (res.result.code == 1) {
             commit({
               type: 'setGroupList',
@@ -321,6 +315,19 @@ export default {
               type: 'setSearchWords',
               totalPages: res.data.pagerMemory.pages,
               data: res.data
+            })
+          }
+        })
+    },
+    //==================================================================检索详情页==========================================================================
+    getDetail({ commit }, products) {
+      request
+        .get(`/api/server/product/ticket-${products}.json?pid=${products}.html`)
+        .then(res => {
+          if (res.result.code == 1) {
+            commit({
+              type: 'getDeti',
+              a: res.data.product
             })
           }
         })

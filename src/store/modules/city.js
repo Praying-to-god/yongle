@@ -73,14 +73,8 @@ export default {
   },
   actions: {
     //获得城市列表数据
-    getCities({
-      commit
-    }) {
+    getCities({ commit }) {
       request.get('/api/server/content/city/list.json').then(res => {
-        console.log(res.data.fcitys)
-        console.log(res.data.hotCitys)
-        // console.log(res.data.hotCitys.PRODUCTNUM)
-
         if (res.result.code == 1) {
           commit({
             type: 'setCities',
@@ -91,20 +85,14 @@ export default {
       })
     },
     // 获取选择城市首页数据
-    getCityType({
-      commit,
-      state
-    }) {
+    getCityType({ commit, state }) {
       if (state.cities.length == 0) {
         request.get(`/api/server/content/city/sz.json`).then(res => {
-          console.log(res)
-          console.log(state.cityjx)
           if (res.result.code == 1) {
             commit({
-                // 进行对仓库state赋值处理
-                type: 'setTuijian',
-                tuijian: res.data.recommendPage.list
-              }),
+              type: 'setTuijian',
+              tuijian: res.data.recommendPage.list
+            }),
               commit({
                 type: 'setbannerList',
                 bannerList: res.data.slideList.splice(0, 5)
@@ -121,7 +109,6 @@ export default {
           .then(res => {
             if (res.result.code == 1) {
               commit({
-                // 进行对仓库state赋值处理
                 type: 'setTuijian',
                 tuijian: res.data.recommendPage.list
               })
@@ -138,10 +125,7 @@ export default {
       }
     },
     //获取选择场馆数据
-    getCityVenue({
-      commit,
-      state
-    }) {
+    getCityVenue({ commit, state }) {
       if (state.cities.length == 0) {
         request
           .get(
@@ -150,7 +134,6 @@ export default {
           .then(res => {
             if (res.result.code == 1) {
               commit({
-                // 进行对仓库state赋值处理
                 type: 'setgymList',
                 gymList: res.data.venuePage.list
               })
@@ -164,7 +147,6 @@ export default {
           .then(res => {
             if (res.result.code == 1) {
               commit({
-                // 进行对仓库state赋值处理
                 type: 'setgymList',
                 gymList: res.data.venuePage.list
               })

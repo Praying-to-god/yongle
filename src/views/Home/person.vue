@@ -1,63 +1,73 @@
 <template>
   <!-- 个人中心页 -->
   <div class="person">
-      <div class="person-head">
-        <div class="head-bg">
-        </div>
-         <div class="head-icon">
-          <router-link to="/main">
-            <span style="color:gray" class="iconfont icon-xiangzuoyuanjiantouzuojiantouxiangzuomianxing"></span>
-          </router-link>
-        </div>
-        <div class="con">
-          <div class="top">
-            <div class="head-portrait">
-              <img style="height:64px;border:2px solid #fff;border-radius:50%" :src="this.userInfo.avatar" alt="">    
-              <h4>wap{{this.userInfo.username}}</h4>
-            </div>
-            <div class="right">
-              <a href="#">
-                <span class="iconfont icon-kefu1"></span>
-              </a>
-              <router-link to="/profile">
-                <span class="iconfont icon-shezhi"></span>
-              </router-link>
-            </div>
-          </div>
-          <div class="bot">
-            <span><a href="#">0张<br/>现金券</a></span>
-            <span><a href="#">未启用<br/>电子钱包</a></span>
-            <span><a href="#">0<br/>积分</a></span>
-          </div>
-        </div>
+    <div class="person-head">
+      <div class="head-bg"></div>
+      <div class="head-icon">
+        <router-link to="/main">
+          <span
+            style="color:gray"
+            class="iconfont icon-xiangzuoyuanjiantouzuojiantouxiangzuomianxing"
+          ></span>
+        </router-link>
       </div>
-
-      <div class="person-content">
-        <div class="con-center">
+      <div class="con">
+        <div class="top">
+          <div class="head-portrait">
+            <img
+              style="height:64px;border:2px solid #fff;border-radius:50%"
+              :src="userInfo && userInfo.avatar"
+              alt=""
+            />
+            <h4>wap{{ userInfo && userInfo.username }}</h4>
+          </div>
+          <div class="right">
             <a href="#">
-              <i class="iconfont icon-dingdan"></i>
-              <p>我的订单</p>
+              <span class="iconfont icon-kefu1"></span>
             </a>
-            <a href="#">
-              <i class="iconfont icon-weibiaoti--"></i>
-              <p>现金券</p>
-            </a>
+            <router-link to="/profile">
+              <span class="iconfont icon-shezhi"></span>
+            </router-link>
+          </div>
         </div>
-        <div class="con-bot">
-          <ul>
-            <li v-for="item in botList" :key="item.id">
-               <router-link :to="item.href">
-                <i class="iconfont" :class="[item.icon]"></i>
-                <p>{{item.name}}</p>
-               </router-link>
-            </li>
-          </ul>
+        <div class="bot">
+          <span
+            ><a href="#">0张<br />现金券</a></span
+          >
+          <span
+            ><a href="#">未启用<br />电子钱包</a></span
+          >
+          <span
+            ><a href="#">0<br />积分</a></span
+          >
         </div>
       </div>
     </div>
- 
-</template>
 
+    <div class="person-content">
+      <div class="con-center">
+        <a href="#">
+          <i class="iconfont icon-dingdan"></i>
+          <p>我的订单</p>
+        </a>
+        <a href="#">
+          <i class="iconfont icon-weibiaoti--"></i>
+          <p>现金券</p>
+        </a>
+      </div>
+      <div class="con-bot">
+        <ul>
+          <li v-for="item in botList" :key="item.id">
+            <router-link :to="item.href">
+              <i class="iconfont" :class="[item.icon]"></i>
+              <p>{{ item.name }}</p>
+            </router-link>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</template>
 
 <script>
 import { mapState } from 'vuex'
@@ -71,7 +81,7 @@ export default {
         { id: 3, name: '我的登记', icon: 'icon-wodedengji', href: 'person' },
         { id: 4, name: '我的提问', icon: 'icon-icon-test', href: 'person' },
         { id: 5, name: '观影凭证', icon: 'icon-pingzheng', href: 'person' }
-      ],
+      ]
     }
   },
   computed: {
@@ -79,17 +89,16 @@ export default {
   },
   methods: {
     fn() {
-      if(!this.userInfo){
+      if (!this.userInfo) {
         router.replace('/login')
       }
     }
   },
   mounted() {
-   this.fn()
+    this.fn()
   }
 }
 </script>
-
 
 <style lang="scss">
 @import '../../assets/styles/common/mixin.scss';

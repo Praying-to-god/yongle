@@ -1,30 +1,35 @@
 <template>
-    <div class="collect">
-        <!-- 我的收藏 -->
-        <div class="title">
-            <router-link to="/person">
-                <span class="iconfont icon-fanhuizuojiantouxiangzuoshangyibuxianxing"></span>
-            </router-link>
-            <h2>我的收藏</h2>   
-            <i></i>   
-        </div>
-        <ul class="myLove">
-            <li>
-                <div class="left">
-                    <img src="//static.228.cn/upload/2019/08/20/AfterTreatment/1566282023896_u8s1-0.jpg!t90x120.jpg" alt="">
-                    <em>售票中</em>
-                </div>
-                <div class="right">
-                    <h4>红壶相声社•精品相声大会红点星空剧场专场演出（11月）</h4>
-                    <p>
-                        <span>2019.11.02-2019.11.16</span>
-                        <span>红点星空软件园剧场</span>
-                    </p>
-                    <b><em>¥50</em>&nbsp;起</b>
-                </div>
-            </li>
-        </ul>
+  <div class="collect">
+    <!-- 我的收藏 -->
+    <div class="title">
+      <router-link to="/person">
+        <span
+          class="iconfont icon-fanhuizuojiantouxiangzuoshangyibuxianxing"
+        ></span>
+      </router-link>
+      <h2>我的收藏</h2>
+      <i></i>
     </div>
+    <ul class="myLove">
+      <li>
+        <div class="left">
+          <img
+            src="//static.228.cn/upload/2019/08/20/AfterTreatment/1566282023896_u8s1-0.jpg!t90x120.jpg"
+            alt=""
+          />
+          <em>售票中</em>
+        </div>
+        <div class="right">
+          <h4>红壶相声社•精品相声大会红点星空剧场专场演出（11月）</h4>
+          <p>
+            <span>2019.11.02-2019.11.16</span>
+            <span>红点星空软件园剧场</span>
+          </p>
+          <b><em>¥50</em>&nbsp;起</b>
+        </div>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <style lang="scss">
@@ -81,7 +86,6 @@
       }
     }
     .right {
-      //   padding-left: 10px;
       width: 230px;
       h4 {
         font-size: 16px;

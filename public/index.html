@@ -10,9 +10,28 @@
       rel="stylesheet"
       href="//at.alicdn.com/t/font_1359943_ukgjvx3r18.css"
     />
+    <script>
+      (function(doc,win){
+        var docEl = doc.documentElement,
+          resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+          recalc = function(){
+            var clientWidth = docEl.clientWidth
+            if(!clientWidth) return
+            // 设置屏幕宽度最大是 640
+            if(clientWidth >= 640){
+              docEl.style.fontSize = '64PX';
+            }else{
+              // 设置 html 的 fontSize 大小
+              docEl.style.fontSize = clientWidth / 10 + 'px';
+            }
+          }
+        if(!doc.addEventListener) return
+        win.addEventListener(resizeEvt,recalc,false)
+        doc.addEventListener('DOMContentLoaded',recalc,false)
+      })(document,window)
+    </script>
   </head>
   <body>
     <div id="app"></div>
-    <!-- built files will be auto injected -->
   </body>
 </html>

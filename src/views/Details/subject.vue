@@ -2,7 +2,10 @@
   <!-- 影片列表页 -->
   <div class="subject">
     <div class="subject-head">
-      <img src="https://static.228.cn/upload/2019/06/21/1561085418197_z8x2_m1.jpg!t640x260.jpg" alt />
+      <img
+        src="https://static.228.cn/upload/2019/06/21/1561085418197_z8x2_m1.jpg!t640x260.jpg"
+        alt
+      />
       <div class="head-icon">
         <router-link to="/main">
           <i class="gobacks"></i>
@@ -21,17 +24,22 @@
     </div>
     <div>
       <div class="subject-list">
-        <a href="#" class="goods-con" v-for="(item,index) in list" :key="index">
+        <a
+          href="#"
+          class="goods-con"
+          v-for="(item, index) in list"
+          :key="index"
+        >
           <div class="left">
             <img :src="`https://static.228.cn${item.PSMILLIMG}`" />
             <i class="gradual-red tip tip-grabSeat">售票中</i>
           </div>
           <div class="right">
-            <b class="name">{{item.NAME}}</b>
-            <span class="spanone">{{item.SHOWDATE}}</span>
-            <span class="spantwo">{{item.VNAME}}</span>
+            <b class="name">{{ item.NAME }}</b>
+            <span class="spanone">{{ item.SHOWDATE }}</span>
+            <span class="spantwo">{{ item.VNAME }}</span>
             <span class="spanthree">
-              <b class="red">{{item.MINPRICE}} - {{item.MAXPRICE}}元</b>
+              <b class="red">{{ item.MINPRICE }} - {{ item.MAXPRICE }}元</b>
             </span>
           </div>
         </a>
@@ -51,7 +59,6 @@ export default {
   },
   created() {
     request.get('/api/server/subject/detail-xiechunhua0621.json').then(res => {
-      console.log(res)
       this.list = res.data.subjectProductList
     })
   }

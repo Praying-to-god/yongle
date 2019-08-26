@@ -4,7 +4,7 @@
     <!-- 头部 -->
     <div class="main-head">
       <router-link to="/city" class="main-city">
-        <span>{{dizhi}}</span>
+        <span>{{ dizhi }}</span>
         <i class="iconfont icon-xiala"></i>
       </router-link>
       <div class="main-search">
@@ -58,11 +58,19 @@
     <!-- 谢春花链接 -->
     <div class="first-pay-first">
       <router-link to="/subject">
-        <img src="https://static.228.cn/upload/2019/06/21/1561085435056_e4a0_m1.jpg" alt />
+        <img
+          src="https://static.228.cn/upload/2019/06/21/1561085435056_e4a0_m1.jpg"
+          alt
+        />
       </router-link>
     </div>
     <!-- 列表组件 -->
-    <Homelist :recommendlist="tuijian" :gymList="gymList" :cur="cur" @abc="bcd" />
+    <Homelist
+      :recommendlist="tuijian"
+      :gymList="gymList"
+      :cur="cur"
+      @abc="bcd"
+    />
   </div>
 </template>
 <script>
@@ -81,19 +89,15 @@ export default {
     Homelist
   },
   computed: {
-    // ...mapState('home', ['bannerList', 'recommendlist', 'gymList']),
     ...mapState('city', ['bannerList', 'tuijian', 'gymList', 'dizhi'])
   },
   methods: {
-    // ...mapActions('home', ['getrecommendlist', 'getgymList']),
     ...mapActions('city', ['getCityType', 'getCityVenue']),
     bcd(a) {
       this.cur = a
     }
   },
   created() {
-    // this.getrecommendlist()
-    // this.getgymList()
     this.getCityType()
     this.getCityVenue()
   }
